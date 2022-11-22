@@ -1,0 +1,380 @@
+[
+    {
+      "indicator": "Proposed Indicators",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "RMNCAH",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "Maternal Health",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "Number of skilled deliveries",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Antenatal client first visits",
+      "county_level": "Yes",
+      "county_analysis_done": "locked",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Proportion of Adolescent Pregnancy among ANC Clients",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Sexual violence cases",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Violence cases",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Child Health",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "Children presenting with symptoms of Pneumonia",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Low birth weight rate (<2500g)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Vitamin A supplementation (12-59 months)",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "DPT3 doses administered",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Penta 3 dropout rate",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Infant feeding options",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Iron & Folic acid supplementation",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Counselling on Exclusive BreastFeeding - community level",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Communicable disesases",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "No. of PLWHIV accessing  ART",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Newly Enrolled on ART",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "HIV positive pregnant women on HAART",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "HIV tests performed",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Malaria in pregnancy",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Malaria patients on Artemether Lumafantrine (AL)",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Number of confirmed cases of Malaria",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "TB -Number of the cases notified",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "TB Cure rate- Quarterly",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "TB Treatment success rate(All forms of TB)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "NCDs",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "Hypertension Cases",
+      "county_level": "Yes",
+      "county_analysis_done": "locked",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Women aged 25-49 screened for cervical cancer",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Diabetes Cases",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "No. accessing palliative care? MOH 741",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "No. accessing chemotherapy Cancer care?",
+      "county_level": "Yes",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Number accessing Dialysis services?",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Utilization",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "Bed occupancy rate",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Number of OPD visits",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Number Of Under Five Children Who Attended Out Patient Department (U5OPD)",
+      "county_level": "Yes",
+      "county_analysis_done": "done",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Moratlity",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "All Moratlity",
+      "county_level": "Yes",
+      "county_analysis_done": "No data",
+      "data_in_khis": "Y"
+    },
+    {
+      "indicator": "Moratlity (upper respiratory diseases)?",
+      "county_level": "Yes",
+      "county_analysis_done": "No data",
+      "data_in_khis": "CHECK"
+    },
+    {
+      "indicator": "Health System",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "HR Available/absenteesim rate",
+      "county_level": "Yes",
+      "county_analysis_done": "No data",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Availability of Commodities",
+      "county_level": "Yes",
+      "county_analysis_done": "No data",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Stock outs days for EPI commodities",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "RUTF stock out rate",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Stock outs days HIV commodities",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "ART -adults",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Tenofovir, Lamivudine, Dolutegravir  (TLD)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "TDF, Lamivudine, Efavirenz (TLE )",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "ART- Paediatrics",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Lamivudine (3TC)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Abacavir (ABC)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Nevirapine syrup",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "HIV test kit ( determine)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Viral Load testing",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Stock outs days for Malaria commodities",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "Artemether Lumafantrine (AL)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Rapid Diagnostics test (RDT)",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Stock outs days for TB commodities",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": ""
+    },
+    {
+      "indicator": "Drugs??",
+      "county_level": "Yes",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    },
+    {
+      "indicator": "Catridges for gene Xperts",
+      "county_level": "",
+      "county_analysis_done": "",
+      "data_in_khis": "N"
+    }
+  ]

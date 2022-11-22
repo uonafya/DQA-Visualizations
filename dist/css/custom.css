@@ -1,0 +1,403 @@
+
+ /* CUSTOM */
+ .slimtable td,
+.slimtable th{
+    padding: 4px 8px !important;
+}
+.table th{
+    font-weight: bold !important;
+}
+.hidden{
+    display: none !important;
+    max-width: 0px !important;
+    max-height: 0px !important;
+    visibility: hidden !important;
+}
+.m-t-5{
+    margin-top: 5px !important;
+  }
+.m-b-5{
+    margin-bottom: 5px !important;
+  }
+  
+  .m-t-10{
+    margin-top: 10px !important;
+  }
+  
+  .m-t-15{
+    margin-top: 15px !important;
+  }
+  
+  .m-b-5{
+    margin-bottom: 5px !important;
+  }
+  .centr{
+      margin-left: auto !important;
+      margin-right: auto !important;
+      display: block !important;
+      float: none !important;
+  }
+  .landing-card{
+      
+  }
+  .landing-card > a:not(.active){
+      color: #333 !important;
+  }
+  .landing-card > a.active label,
+  .landing-card > a.active{
+    font-weight: bold !important;
+    /* text-decoration: underline !important; */
+    cursor: pointer;
+  }
+  .m-b-10{
+    margin-bottom: 10px !important;
+  }
+  .width-100{
+    width: 100% !important;
+  }
+  .m-b-15{
+    margin-bottom: 15px !important;
+  }
+  .highcharts-credits{
+    display: none;
+  }
+  .page-wrapper.fullw{
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  .m-l-0{
+    margin-left: 0 !important;
+  }
+  .bcwhite{
+    background-color: #fff !important;
+  }
+  .bcred{
+    background-color: #f00 !important;
+  }
+  .br3{
+    border-radius: 3px;
+  }
+  .p-5{
+    padding: 5px;
+  }
+  .loader-sp{
+    height: 200px;
+    max-height: 100vh !important;
+    min-height: 30vh !important;
+    padding: 30px;
+    width: 100%;
+    position: relative;
+    display: block;
+    float: none;
+  }
+  .loader-sp > div{
+    margin: 0 auto;
+  }
+
+  .loader{
+    margin: 1em 0 3em;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+  }
+  nav .breadcrumb{
+    display: none !important;
+  }
+  .redcell{
+      background: #ff0000 !important;
+      color: #ffffff !important;
+  }
+  ul.collapse.first-level ul.collapse.first-level{
+    margin-left: 12px;
+  }
+  a.sidebar-link:hover,
+  a.sidebar-link:focus,
+  a.sidebar-link:active{
+    text-decoration: none !important;
+  }
+  .first-level .sidebar-item a.sidebar-link:active,
+  .first-level .sidebar-item a.sidebar-link:focus,
+  .sidebar-nav ul .sidebar-item:hover {
+    background: rgba(200,207,255,0.1);
+  }
+  .hidden{
+    display: none !important;
+  }
+  .table td, .table th {
+    padding: 0.85rem !important;
+  }
+  i.mdi{
+    display: none !important;
+  }
+  i.mdi.mdi-menu.font-24{
+    /*display: block !important;*/
+    
+  }
+  .table tr td:first-child{
+    font-weight: bold !important;
+    color: #232323;
+    font-size: 1.1em;
+  }
+  .highcharts-title{
+    text-transform: uppercase;
+    color: #131522;
+    font-weight: 600 !important;
+  }
+  .highcharts-subtitle{
+    color: #01286b !important;
+    fill: #01286b !important;
+    font-size: 1.33em !important;
+    letter-spacing: 1px;
+    font-weight: 600 !important;
+    text-decoration: underline;
+  }
+  .highcharts-axis-title{
+    color: #01286b !important;
+    fill: #01286b !important;
+    font-weight: 600 !important;
+    font-size: 1.1em !important;
+    text-transform: uppercase;
+  }
+  .highcharts-container,
+  .highcharts-container svg{
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+  .disabledTab{
+    pointer-events: none;
+  }
+  .table-condensed tr td{
+    padding: 0.25rem !important;
+    font-size: 0.95em !important;
+  }
+
+  .nav-tabs li a.active.show{
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: rgb(221, 221, 221);
+    border-bottom-color: transparent;
+  }
+
+  .nav-tabs > li.active > a.active, .nav-tabs > li.active > a.active:focus, .nav-tabs > li.active > a.active:hover {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+        border-bottom-color: rgb(221, 221, 221);
+    border-bottom-color: transparent;
+  }
+
+  .nav-tabs > li.active > a:not(.active.show):focus,
+  .nav-tabs > li.active > a:not(.active.show):hover,
+  .nav-tabs > li.active > a:not(.active.show),
+  .nav-tabs li a:not(.active.show){
+    text-decoration: none !important;
+    background-color: #eee !important;
+  }
+
+  .nav-tabs > li > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+   
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+
+.fcblack{
+  color: #121212 !important;
+}
+.text-bold{
+  font-weight: bold !important;
+}
+.sidebar-nav ul .sidebar-item .first-level .sidebar-item .sidebar-link {
+  padding-left: 25px;
+}
+.text-caps{
+  text-transform: uppercase;
+}
+.bb5{
+  border-bottom: 5px solid gray
+}
+.highcharts-container{width:100% !important; height:100% !important;}
+.sidebar-nav ul .sidebar-item .first-level .sidebar-item.active .sidebar-link {
+  background: #0c79ae;
+  border-top: 1px solid #1f262d !important;
+  margin-left: 3px;
+}
+.form-control:disabled{
+  cursor: not-allowed;
+}
+
+.sidebar-nav ul .sidebar-item .first-level .sidebar-item:not(.active) a.sidebar-link:not(.active){
+  background: #0a0b41 !important
+}
+.sidebar-nav ul .sidebar-item .first-level .sidebar-item:not(.active) a.sidebar-link:not(.active):hover{
+  background: #0c79ae !important
+}
+.sidebar-nav ul .sidebar-item .sidebar-link.active, .sidebar-nav ul .sidebar-item .sidebar-link:hover {
+  background: #0c79ae;
+}
+.ttitle,
+#ttitle{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+
+.em-text{
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.text-black{
+  color: #111;
+}
+.text-red{
+  color: #58160c;
+}
+.text-green{
+  color: #115803;
+}
+.text-blue{
+  color: #110358;
+}
+
+
+
+
+/* covid */
+#main-wrapper .left-sidebar[data-sidebarbg="skin5"], #main-wrapper .left-sidebar[data-sidebarbg="skin5"] ul {
+  background: #01286b;
+}
+#main-wrapper .topbar .navbar-collapse[data-navbarbg="skin5"], #main-wrapper .topbar[data-navbarbg="skin5"],
+#navbarSupportedContent,
+#main-wrapper .topbar .top-navbar .navbar-header[data-logobg="skin5"] {
+  background: #01286b !important;
+}
+.sidebar-nav ul .sidebar-item .sidebar-link{
+  opacity: 1;
+  font-weight: bold;
+  font-size: 1em;
+}
+.page-wrapper {
+  background: #e9f6fd;
+  margin-top: 3rem;
+}
+
+.card{
+  box-shadow: 1px 1px 3px rgba(50,50,50,0.2);
+  border-radius: 4px;
+}
+.form-control::placeholder{
+  color: #444;
+}
+.form-control,
+input, select, textarea {
+  width: 100%;
+  font-size: 16px;
+  line-height: 16px;
+  margin: 0;
+  padding: 9px 11px;
+  color: #000000;
+  outline: none;
+  border: 1px solid #cfcfcf !important;
+  display: block;
+  line-height: normal;
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  background: #fcfcfc;
+  resize: none;
+  }
+  
+  .form-control:active,
+  .form-control:focus,
+  input:active, input:focus, 
+  select:active, select:focus,
+  textarea:active, textarea:focus {
+    background-color: #ffffff;
+    border-color: #033f3e !important
+  }
+
+  .card-title{
+    font-weight: bold;
+  }
+
+.table-responsive .table tbody{
+  overflow: hidden;
+  overflow-x: scroll;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+.valign-middle,
+.valign-center{
+  vertical-align: middle !important;
+}
+
+.bdr-1{border-radius: 1px}
+.bdr-2{border-radius: 2px}
+.bdr-3{border-radius: 3px}
+.bdr-4{border-radius: 4px}
+.bdr-5{border-radius: 5px}
+.bdr-50{border-radius: 50px}
+.ws-nowrap{white-space: nowrap !important;}
+
+.card-body .table-container,
+.card-body .graph{
+  min-height: 500px;
+}
+
+.text-smaller i{
+  font-size: 1.6em !important;
+  margin-right: 6px;
+}
+.text-muted{
+  opacity: 0.7;
+}
+
+.topbar{
+  position: fixed;
+  width: 100%;
+}
+.left-sidebar{
+  position: fixed;
+}
+/* covid */
+
+.collapsible{
+  color: #fff;
+  padding: 14px 8px;
+  line-height: 20px;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.collapsible:hover {
+  background: #0c79ae;
+}
+.collap{
+  margin-left: 15%;
+}
+.table-title{
+  font-weight: 50px;
+  color: #ff0000 !important;
+  line-height: 30px;
+}
+.col-table{
+  text-align: center;
+}

@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/prd.png" />
+    <title>
+        Dreams | Partner Reporting Dashboard
+    </title>
+    <!-- Custom CSS -->
+    <link href="../assets/libs/select2/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highcharts/8.1.1/css/highcharts.min.css">
+    <link href="../dist/css/style.min.css" rel="stylesheet" />
+    <link href="../dist/css/custom.css" rel="stylesheet" />
+    <link href="../dist/css/main.css" rel="stylesheet" />
+
+</head>
+
+<body onload="renderAll(); window.fetchData();">
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <header class="topbar" data-navbarbg="skin5" id="header_target"></header>
+        <aside class="left-sidebar" data-sidebarbg="skin5">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav" id="nav_target"></nav>
+            </div>
+        </aside>
+        <div class="page-wrapper">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center" id="filter_target">
+                        <!-- <small class="text-bold">Filter:</small> -->
+                        <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+                                </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 p-0" id="status_target"> </div>
+                    <div class="col-md-12 p-0" id="loading_target"> </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"> Active Beneficiaries</h4>
+                                <div class="graph" id="active">
+                                    <p class="card-text"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(A) Social Asset Building (SAB)</h4>
+                                <div class="graph" id="sab">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(B)HIV Testing Services</h4>
+                                <div class="graph" id="hts">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(C) Financial Capabilities</h4>
+                                <div class="graph" id="financial">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(D) Parenting/Caregiver Support</h4>
+                                <div class="graph" id="parenting">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(E) Post Violence Care</h4>
+                                <div class="graph" id="violence">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(F) Education Subsidy</h4>
+                                <div class="graph" id="education">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(G) Condom Promotion</h4>
+                                <div class="graph" id="condom">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(H) Contraception IEC</h4>
+                                <div class="graph" id="contraception">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(I) PrEP IEC</h4>
+                                <div class="graph" id="prep">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(J) PrEP New</h4>
+                                <div class="graph" id="prep_new">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(K) CSEA</h4>
+                                <div class="graph" id="csea">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">(L) Entrepreneurship Training</h4>
+                                <div class="graph" id="entrepreneurship">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Service Layering</h4>
+                                <div class="graph" id="layering">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="footer_target" class="p-0 m-0 w-100"></div>
+
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/select2/select2.min.js"></script>
+    <script src="../assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="../dist/js/sidebarmenu.js"></script>
+    <script src="../dist/js/custom.js"></script>
+
+    <!-- *********** <WeekPicker ************** -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.26.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+    <script src="../dist/js/weekpicker.js"></script>
+    <!-- *********** WeekPicker/> ************** -->
+
+    <!-- *********** <Highcharts ************** -->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/8.1.1/es-modules/highcharts.src.min.js"></script>-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <!-- *********** Highcharts/> ************** -->
+
+
+
+
+    <!-- TEMPLATING -->
+    <script src="../dist/js/templates/mustache.js"></script>
+
+    <!-- templates -->
+    <!-- <script id="header_template" type="x-tmpl-mustache">
+                //html here
+            </script> -->
+    <script src="../dist/js/templates/components/footer.js"></script>
+    <script src="../dist/js/templates/components/header.js"></script>
+    <script src="../dist/js/templates/components/nav.js"></script>
+    <script src="../dist/js/templates/components/filter.js"></script>
+    <script src="../dist/js/templates/components/loading.js"></script>
+    <script src="../dist/js/templates/components/status.js"></script>
+    <!-- templates -->
+
+    <!-- renders -->
+    <script src="../dist/js/templates/renders.js"></script>
+    <!-- renders -->
+
+    <!-- render Fn -->
+    <script>
+        function renderAll() {
+            let page_title = { title: 'Dreams Bi-Weekly Dashboard' }
+            let page_filters = {
+                is_county: true,
+                is_subcounty: false,
+                is_ward: false,
+                is_facility: false,
+                is_period: false,
+                is_mechanism: true,
+                is_period_range: false,
+                is_biweek: true,
+                is_biweek_range: true
+            }
+            let is_loading = { is_loading: false }
+            let footer_yr = { yr: new Date().getFullYear() }
+            let page_status = { title: '', message: '', type: 'info', hidden: true } //type: info, success, danger
+
+            renderNav()
+            renderHeader(page_title)
+            renderFooter(footer_yr)
+            renderLoader(is_loading)
+            renderFilter(page_filters)
+            renderStatus(page_status)
+        }
+    </script>
+    <!-- render Fn -->
+    <!-- TEMPLATING -->
+
+
+    <script src="../dist/js/_utils.js"></script>
+
+
+
+
+    <!-- ++++++++++++++++++++++++ PAGE DATA LOGIC ++++++++++++++++++++++++ -->
+    <script>
+        var finalpe 
+        window.fetchData = (prop) => {
+
+            // let org_unit = window.sessionStorage.getItem('ess_ou') || "HfVjCurKxh2"
+            let org_unit = "HfVjCurKxh2"
+            // var mechanism = ""
+            if (prop && prop.ou) {
+                org_unit = prop.ou
+            }
+            let prd = `LAST_4_BIWEEKS`
+            if (prop && prop.pe) {
+                prd = prop.pe
+            }
+            if (prop && prop.pe && prop.pe_to) {
+                console.log(prop.pe, prop.pe_to)
+                prd = dateRangeBiWeek(prop.pe, prop.pe_to)
+            }
+            console.log('prd = = = ' + prd);
+
+            let ouFilterType = window.sessionStorage.getItem("ouFilterType") || "national"
+            finalpe = prd.replace(/,/g, ';');
+            var cummulativeperiod;
+            if (finalpe == `LAST_YEAR`) {
+                var yr = `LAST_YEAR`
+            } else {
+                var yr = finalpe.substring(0, 4)
+            }
+            
+            if (prop && prop.me) {
+                mechanism = prop.me
+            } else {
+                mechanism = ""
+            }
+            // if (finalpe == `LAST_6_MONTHS`){
+            //     cummulativeperiod = `202001;202002;202003;202004;202005;202006;202007;202008;202009;202010;202011;202012;202101;202102;202103;202104;202105;202106;202107;202108;202109;202110;202111;202112;202201;202202;202203;202204;202205;202206;202207;202208;202209;202210;202211;202212`
+            // }else{
+            //     cummulativeperiod = finalpe
+            // }
+
+            let sab = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:wPiem0Ab0ls&dimension=pe:${finalpe}&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`
+            let sab_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:fb23W8lnnts&filter=lRp2LBbTuM5:${mechanism}&dimension=pe:${finalpe}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let hts = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:Z9xQn9NSbCZ&dimension=pe:${finalpe}&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`
+            let hts_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:YC61Zc9zF4f&dimension=pe:${finalpe}&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`
+            
+            let financial = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:aWY8VPAJLup&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let financial_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:Qcw0WSZDEKu&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let parenting = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:eqbfM98yO1V&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let parenting_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:yKOnQo5vjUU&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let violence = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:hrBtGPr1kl1&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let violence_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:pQTmycY8NC8&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let education = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:bQf7XglUaZC&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let education_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:m6B0ndjul7F&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            
+            let condom = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:rdXlq50NEz0&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let condom_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:ejORwTymnlY&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let contraception = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:xpA8jszQWFs&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let contraception_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:XKozV7I3leK&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let prep = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:jWGndiP8GUS&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let prep_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:hWpSuKrXPrs&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let prep_new = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:zBDelQIhkNa&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let prep_new_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:yoSQqfJLGKE&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let csea = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:q5fyr4N3okB&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let csea_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:JuFKVlyIAP8&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let entrepreneurship = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:kmopkU9kSnI&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+            let entrepreneurship_target = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:kdapqXWDK0S&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let layering = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:GGLPDgJAXwh;ZlcI1gmtSax;FpbPscuCVR1&dimension=pe:${finalpe}&dimension=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            let active = `https://indextestingapp.uonbi.ac.ke/api/29/analytics.json?dimension=dx:ml3QiRDPDLY&dimension=pe:${finalpe}&filter=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`
+
+            
+            console.log(sab)
+            console.log(sab_target)
+
+            // getart_review(onArtReview)
+            getSab(sab,sab_target)
+            getHts(hts,hts_target)
+            getfinancial(financial,financial_target)
+            getParenting(parenting,parenting_target)
+            getViolence(violence,violence_target)
+            getEducation(education,education_target)
+            getCondom(condom,condom_target)
+            getContraception(contraception,contraception_target)
+            getPrep(prep,prep_target)
+            getPrep_new(prep_new,prep_new_target)
+            getcsea(csea,csea_target)
+            getEntre(entrepreneurship,entrepreneurship_target)
+            getLayering(layering)
+            getActive(active)
+
+            // getTxCurrindexed(tx_curr_indexed)
+            // getElicitationRation(ElicitationRation)
+            // getTestingYield(testingYield)
+            // getOnArt(onArt)
+            // getovcenrollment(ovcenrollment)
+            // getQaCheck(qaCheck)
+            // getContactbyStatus(contactbyhivstatus)
+            // getSubPop(subpop)
+            // // getTestingCoverage(testingcoverage)
+            // getTestedResult(testedresults)
+            // getTestingCascade(testingcascade)
+
+
+
+
+        }
+
+        function getSab(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Social Asset building'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('sab', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getHts(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'HIV Testing Services'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('hts', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getfinancial(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Financial Capabilities'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('financial', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+
+        function getParenting(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Parenting/Caregiver Support'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('parenting', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getViolence(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Post Violence Care'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('violence', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getEducation(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Education Subsidy'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('education', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getCondom(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Condom Promotion'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('condom', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getContraception(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Contraception IEC'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('contraception', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getPrep(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Prep IEC'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('prep', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getPrep_new(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Prep New'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('prep_new', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getcsea(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'CSEA'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }         
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('csea', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        function getEntre(url,url1) {
+            justFetch(url, {})
+                .then(response => {
+                    justFetch(url1,{})
+                        .then(target=>{
+                    var cTitle = 'Entrepreneurship Training'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                    var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }             
+                    console.log(target)
+                    var dx = response.metaData.dimensions.dx;
+                    var dx_target = target.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+                   
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    dx_target.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = target.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'spline'
+                        pe.map(p_e=>{
+                            let rw = target.rows.find(rw1=>rw1[target.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[target.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                target.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('entrepreneurship', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+                })
+                });
+        }
+        
+
+        function getActive(url) {
+            justFetch(url, {})
+                .then(response => {
+
+                    var cTitle = 'Active Beneficiaries'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                     var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }    
+                    var dx = response.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = ''
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                        
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawArea('active', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+
+                });
+
+        }
+
+
+
+
+
+
+        function getLayering(url) {
+            justFetch(url, {})
+                .then(response => {
+
+                    var cTitle = 'Service Layering'
+                    var theorgunit = response.metaData.dimensions.ou[0];
+                    var curorg = response.metaData.items[theorgunit].name;
+                     var mechanism_length = response.metaData.dimensions.lRp2LBbTuM5
+                    if (mechanism_length.length > 1){
+                        var mechanismName = 'All Partners'
+                    }else{
+                        var mechanism = response.metaData.dimensions.lRp2LBbTuM5[0];
+                        var mechanismName = response.metaData.items[mechanism].name;
+                    }    
+                    var dx = response.metaData.dimensions.dx;
+                    var pe = response.metaData.dimensions.pe;
+                    var stacking = 'normal'
+                    var periodname = []
+                    var dataRows = []
+
+                    let dataToPlot = []
+
+                    dataValues = Array.from(response.rows, r => r[3])
+                    const { rows } = response
+                    response.metaData.dimensions.pe.map(pe => {
+                        periodname.push(response.metaData.items[pe].name)
+
+
+                    })
+                    const getDXName = (id) => {
+                        return response.metaData.items[id].name
+
+                    }
+                    const toNumbers = arr => arr.map(Number);
+     
+                    dx.map((d_x,ix)=>{
+                        let datapoint = {}
+                        datapoint.name = response.metaData.items[d_x].name
+                        datapoint.data = []
+                        datapoint.type = 'column'
+                        pe.map(p_e=>{
+                            let rw = response.rows.find(rw1=>rw1[response.headers.findIndex(jk => jk.name == "dx")] == d_x && rw1[response.headers.findIndex(jk => jk.name == "pe")] == p_e) || [0,0,0,0,0]
+                            datapoint.data.push(parseFloat(rw[
+                                response.headers.findIndex(jk => jk.name == "value")
+                            ]))
+                        })
+                       
+                        dataToPlot.push(datapoint)
+                    })
+                    var fperiodname = periodRange()
+                    function periodRange() {
+                        let finalperiodname = []
+                        finalperiodname.push(periodname[0]);
+                        finalperiodname.push(periodname[periodname.length - 1]);
+
+                        return finalperiodname
+                    }
+                    drawbargraphs('layering', periodname, fperiodname, mechanismName, cTitle, dataToPlot, stacking)
+
+                });
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <!-- ------------------------ PAGE DATA LOGIC ------------------------ -->
+</body>
+
+</html>
