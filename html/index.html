@@ -79,13 +79,13 @@
                     <div class="col-md-2 col-sm-2 col-xs-6">
                         <select class="form-control m-r-5 mb-1" id="category-dropdown" name="category" placeholder="Select category" title="Select category">
                           <option value ="">Category</option>
-                          <option value="">HTS</option>
+                          <option value="">HTS_TST_POS</option>
                           <option value="">TX_NEW</option>
-                          <option value="">TX_CURR</option>
-                          <option value="">NET</option>
-                          <option value="">TX_MMD</option>  
-                          <option value="">PREP</option>
-                          <option value="">VMMC</option>                                                                
+                          <option value="">TB_PREV</option>
+                          <option value="">PMTCT_HEI_POS(0-2)</option>
+                          <option value="">PMTCT_HEI_POS(>2-12)</option>  
+                          <option value="">VMMC_CIRC</option>
+                          <option value="">PREP_NEW</option>                                                                
                         </select> 
                     </div>
                     <div class="col-md-4"></div>
@@ -103,12 +103,91 @@
        
             <div id="save_pdf">
                 
-                <div id="PREP_NEW_DIV">
+                <div id="HTS_TST_POS">
+                        <!-- <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">HTS TST POS</h4>
+                                    <div class="graph" id="hts-tst-pos">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div id="TX_NEW">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">PrEP NEW</h4>
-                                    <div class="graph" id="PREP_NEW">
+                                    <h4 class="card-title">TX New</h4>
+                                    <div class="graph" id="tx-new">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="TB_PREV">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">TB Prev(N)</h4>
+                                    <div class="graph" id="tb-prev">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="PMTCT_HEI_POS_YOUNGER">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">PMTCT HEI POS (0-2 months)</h4>
+                                    <div class="graph" id="pmtct-hei-younger">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="PMTCT_HEI_POS_OLDER">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">PMTCT HEI POS (>2-12 months)</h4>
+                                    <div class="graph" id="pmtct-hei-older">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="VMMC_CIRC">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">VMMC Circ</h4>
+                                    <div class="graph" id="vmmc-circ">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="PREP_NEW">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Prep New</h4>
+                                    <div class="graph" id="prep-new">
 
                                     </div>
                                 </div>
@@ -232,11 +311,11 @@
             }
             if (prop && prop.pe && prop.pe_to) {
                 prd = dateRange(prop.pe, prop.pe_to)
-                // // comsole.log('a hereeee')
-                // // comsole.log('>>>>>'+prop.pe_to)
+                // // console.log('a hereeee')
+                // // console.log('>>>>>'+prop.pe_to)
 
             }
-            // // comsole.log('prd1 = = = ' + prd);
+            // // console.log('prd1 = = = ' + prd);
 
             let ouFilterType = window.sessionStorage.getItem("ouFilterType") || "national"
 
@@ -307,7 +386,7 @@
 
             // Calculates the percent contributions takes two array list
             let getContrib = (array1, array2) => {
-                    console.log({getContributions: array1, array_2: array2})
+                console.log({getContributions: array1, array_2: array2})
                 let sumTotal = sum_list(array2)
                 contrib = []
                 array1.map(arr_1 => {
@@ -344,6 +423,10 @@
             active_partners_name = ["USAID Jamii Tekelezi","USAID4TheChild","USAID AMPATH Uzima","USAID Tujenge Jamii","USAID Fahari Ya Jamii","USAID Imarisha Jamii","USAID Stawisha Pwani","USAID Boresha Jamii","USAID Dumisha Afya","Lea Toto Program"]
                 
 
+
+
+
+
             const groupBy = (groupby) => {
                 // return [filter, level, groupby]
                 if (groupby === 'pe'){
@@ -372,655 +455,41 @@
                 }
             }
 
-            // Graph one  - HTS Testing & Yield
-            let plotGraph_1 = (groupby) => {
+
+            // Graph    - Prep New
+            const plotGraph_1 = (groupby) => {
+                // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:mKNadnhN6yn;ZYXfkQYdsVZ&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:oKm3aRzOqEA&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:2022Q3&filter=ou:HfVjCurKxh2&filter=lRp2LBbTuM5&displayProperty=NAME`,{})
                 .then(response=>{    
-                    let data  = [['Positive', "Negative", 'Yields %']]
-                    let map_filter = []
-                        console.log({graphone: response})
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else{
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
+
+                    // console.log({response})
+                    let data  = [["HTS_TST_POS"]]
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
+
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'ZYXfkQYdsVZ')  || [0, 0, 0, 0, 0, 0]
-                        let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'mKNadnhN6yn')  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[5]) || 0
-                        let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        val_arr.push(v_alue1)  //positive
-                        val_arr.push(v_alue2-v_alue1)  // test - positive = negatives
-                        v_alue3 = parseFloat(((v_alue1/v_alue2)*100).toFixed(2)) // yield
-                        val_arr.push(v_alue3)
-
-                        data.push(val_arr)
-                    })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                            
-                    let x_array = []
-                    let y_data = []
-
-                    y_data[0] = {}
-                    y_data[0].name = "Positive"
-                    y_data[0].color = colours[0]
-                    y_data[0].data = []
-
-                    y_data[1] = {}
-                    y_data[1].name = "Negative"
-                    y_data[1].color = colours[1]
-                    y_data[1].data = []
-
-                    y_data[2] = {}
-                    y_data[2].name = "Yield %"
-                    y_data[2].color = colours[2]
-                    y_data[2].type = 'spline'
-                    y_data[2].yAxis = 1
-                    y_data[2].data = []
-
-                
-                    let target2 = document.getElementById("HTS_TESTING")
-                    let sta = data
-                    let sta_titles = sta.shift()
-                    sta.map(dt=>{
-                        x_array.push(dt[0]);
-                        y_data[0].data.push(dt[1])
-                        y_data[1].data.push(dt[2])
-                        y_data[2].data.push(dt[3])
-                    })
-                    
-                    plotStacked(x_array, "Period", y_data, "Numbers Tested","HTS Testing & Yield ", period_string, target2, 'column', colours, true, "Yield %")
-                })
-            }
-
-            // dataTable Data - HTS Testing & Yield
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:mKNadnhN6yn;ZYXfkQYdsVZ;yFon5O9Dh3x&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:HfVjCurKxh2&displayProperty=NAME`,{})
-            .then(response=>{   
-                mechan_name = []
-                yield = []
-                achieve = []
-
-                positives=[]
-                negatives=[]
-                tested=[]
-                targets=[]
-                const testing = $('#T_HTS_TESTING').DataTable(context)
-                testing.clear()
-                response.metaData.dimensions.lRp2LBbTuM5.map((m_pe,indx)=>{
-                    mechan = response.metaData.items[m_pe].name
-                    v_1 = response.rows.find(r_=>r_[0]==='ZYXfkQYdsVZ' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_2 = response.rows.find(r_=>r_[0]==='mKNadnhN6yn' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_3 = response.rows.find(r_=>r_[0]==='yFon5O9Dh3x' && r_[1]==m_pe) || [0,0,0,0,0] 
-
-                    val_arr1 = parseFloat(v_1[4]) || 0  // positives
-                    val_arr2 = parseFloat(v_2[4]) || 0  // HTS_TST
-                    val_arr3 = parseFloat(v_3[4]) || 0  // hts_tst target
-
-                    val_arr4 = (val_arr2-val_arr1)  // negatives
-                    val_arr5 = getPercent(val_arr1,val_arr2) //  yield = positive / hts_tst
-                    val_arr6 = getPercent(val_arr1,val_arr3) // achievement = hts_tst / hts_tst_target
-
-                    positives.push(val_arr1)
-                    tested.push(val_arr2)
-                    negatives.push(val_arr4)
-                    targets.push(val_arr3)
-                    yield.push(val_arr5)
-                    achieve.push(val_arr6)
-                    mechan_name.push(mechan)
-                    
-                })
-                let contributions = getContrib(tested,tested) // HTS_TST / (HTS_TST => TOTAl)
-                // // comsole.log(mechan_name)
-                    counter = 1
-                mechan_name.map((me_pe,indx) => {
-                    if(active_partners_name.includes(me_pe)){    
-                    testing.row.add([counter,me_pe,positives[indx].toLocaleString(),negatives[indx].toLocaleString()    , yield[indx]+" %",achieve[indx]+" %",contributions[indx]+" %"]).draw(false);
-                    counter ++
-                    }
-                });     
-            })              
-
-
-            // Graph Two  - Linkage (HTS POS & TX NEW)
-            const plotGraph_2 = (groupby) => {
-                p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:b7BDd6Xp5YJ;cZLvFP8qm5H;Oy6hdfH7zdC&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
-                .then(response=>{    
-                    let data  = [['Not Linked', "Tx New", 'Linkage %']]
-                    let map_filter = []
-
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else {
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
-                    
-                    map_filter.map(o_pe=>{
-                        let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'b7BDd6Xp5YJ')  || [0, 0, 0, 0, 0, 0]
-                        let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'cZLvFP8qm5H')  || [0, 0, 0, 0, 0, 0]
-                        let v3_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'Oy6hdfH7zdC')  || [0, 0, 0, 0, 0, 0]  
-
-                        let v_alue1 = parseFloat(v1_[5]) || 0
-                        let v_alue2 = parseFloat(v2_[5]) || 0
-                        let v_alue3 = parseFloat(v3_[5]) || 0
-
-                        val_arr.push(v_alue1)  // not linked
-                        val_arr.push(v_alue2)  // tx_new
-                        val_arr.push(v_alue3)  // linkage
-
-                        data.push(val_arr)
-                    })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                                
-                    let x_array = []
-                    let y_data = []
-
-                    y_data[0] = {}
-                    y_data[0].name = "Not Linked"
-                    y_data[0].color = colours[0]
-                    y_data[0].data = []
-
-                    y_data[1] = {}
-                    y_data[1].name = "Tx New"
-                    y_data[1].color = colours[1]
-                    y_data[1].data = []
-
-                    y_data[2] = {}
-                    y_data[2].name = "Linkage %"
-                    y_data[2].color = colours[2]
-                    y_data[2].type = 'spline'
-                    y_data[2].yAxis = 1
-                    y_data[2].data = []
-
-                
-                    let target2 = document.getElementById("LINKAGE_HTS_TX")
-                    let sta = data
-                    let sta_titles = sta.shift()
-                    sta.map(dt=>{
-                        x_array.push(dt[0]);
-                        y_data[0].data.push(dt[1])
-                        y_data[1].data.push(dt[2])
-                        y_data[2].data.push(dt[3])
-                    })
-                    
-                    plotStacked(x_array, "Period", y_data, "Numbers","Linkage (HTS POS & TX NEW)", period_string, target2, 'column', colours, true, "Linkage %")
-                })
-            }
-
-            // dataTable Data - Linkage (HTS POS & TX NEW)
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:b7BDd6Xp5YJ;cZLvFP8qm5H;Oy6hdfH7zdC&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:HfVjCurKxh2&displayProperty=NAME`,{})
-            .then(response=>{   
-                mechan_name = []
-                txnew = []
-                notLinked = []
-                linkage=[]
-        
-                const testing = $('#T_LINKAGE_HTS_TX').DataTable(context)
-                testing.clear()
-                response.metaData.dimensions.lRp2LBbTuM5.map((m_pe,indx)=>{
-                    mechan = response.metaData.items[m_pe].name
-                    v_1 = response.rows.find(r_=>r_[0]==='b7BDd6Xp5YJ' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_2 = response.rows.find(r_=>r_[0]==='cZLvFP8qm5H' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_3 = response.rows.find(r_=>r_[0]==='Oy6hdfH7zdC' && r_[1]==m_pe) || [0,0,0,0,0] 
-
-                    val_arr1 = parseFloat(v_1[4]) || 0  // txnew
-                    val_arr2 = parseFloat(v_2[4]) || 0  // HTS_TST
-                    val_arr3 = parseFloat(v_3[4]) || 0  // hts_tst target
-
-
-                    txnew.push(val_arr2)
-                    notLinked.push(val_arr1)
-                    linkage.push(val_arr3)
-                    mechan_name.push(mechan)
-                    
-                })
-                let contributions = getContrib(txnew,txnew) // HTS_TST / (HTS_TST => TOTAl)
-                // // comsole.log(mechan_name)
-                counter1  = 1
-                mechan_name.map((me_pe,indx) => {
-                    if(active_partners_name.includes(me_pe)){    
-                    testing.row.add([counter1   ,me_pe, txnew[indx].toLocaleString(),notLinked[indx].toLocaleString(), linkage[indx]+" %",contributions[indx]+" %",contributions[indx]+" %"]).draw(false);
-                    counter1     ++
-                    }
-                });     
-            })
-                
-
-            //  Donuts on row 3
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:mKNadnhN6yn;yFon5O9Dh3x;ZYXfkQYdsVZ;C2w610hLV2X;cZLvFP8qm5H;ee6p52I4oZo&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${finalpe}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`,{})
-            .then(response => {
-                let hts_arr1 = []
-                let hts_arr2 = []
-                let hts_target = []
-
-                let pst_arr1 = []
-                let pst_arr2 = []
-                let pst_target = []
-
-                let tx_arr1 = []
-                let tx_arr2 = []
-                let tx_target = []
-
-                let sub_title = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                response.metaData.dimensions.pe.map(o_pe=>{
-                    // Donut 1
-                    hts_1 = response.rows.find(r_=>r_[0]==='mKNadnhN6yn' && r_[3] === o_pe) || 0
-                    hts_2 = response.rows.find(r_=>r_[0]==='yFon5O9Dh3x' && r_[3] === o_pe) || 0
-
-                    hts_val1 = parseFloat(hts_1[4]) || 0   
-                    hts_val2 = parseFloat(hts_2[4]) || 0   
-
-                    hts_arr1.push(hts_val1)
-                    hts_arr2.push(hts_val2)
-
-                    // Donut 2
-                    pst_1 = response.rows.find(r_=>r_[0]==='ZYXfkQYdsVZ' && r_[3] === o_pe) || 0
-                    pst_2 = response.rows.find(r_=>r_[0]==='C2w610hLV2X' && r_[3] === o_pe) || 0
-
-                    pst_val1 = parseFloat(pst_1[4]) || 0   
-                    pst_val2 = parseFloat(pst_2[4]) || 0   
-
-                    pst_arr1.push(pst_val1)
-                    pst_arr2.push(pst_val2)
-
-                    // Donut 4
-                    tx_1 = response.rows.find(r_=>r_[0]==='cZLvFP8qm5H' && r_[3] === o_pe) || 0
-                    tx_2 = response.rows.find(r_=>r_[0]==='ee6p52I4oZo' && r_[3] === o_pe) || 0
-
-                    tx_val1 = parseFloat(tx_1[4]) || 0   
-                    tx_val2 = parseFloat(tx_2[4]) || 0   
-
-                    tx_arr1.push(tx_val1)
-                    tx_arr2.push(tx_val2)
-                    
-                })
-                // Donut 1
-                hts_tst = sum_list(hts_arr1)
-                hts_tst_target = sum_list(hts_arr2)
-
-                hts_target.push(['Results', hts_tst])
-                hts_target.push(['Gap', (hts_tst_target - (hts_tst_target>0 ? hts_tst : 0))])
-                // hts_target_title = ["results","gap"]
-
-                plot_Donut('TESTING_TARGET',sub_title,'', hts_target,'Testing target')
-
-                // Donut 2
-                pst_tst = sum_list(pst_arr1)
-                pst_tst_target = sum_list(pst_arr2)
-
-                pst_target.push(['Results', pst_tst])
-                pst_target.push(['Gap', (pst_tst_target - (pst_tst_target>0 ? pst_tst : 0))])
-                // pst_target_title = ["results","gap"]
-
-                plot_Donut('POSITIVES_TARGET', sub_title, '', pst_target, 'Positives target')
-
-                // Donut 3
-                tx_tst = sum_list(tx_arr1)
-                // tx_tst_target = sum_list(tx_arr2)
-                tx_tst_target = 60000
-
-                tx_target.push(['Results', tx_tst])
-                tx_target.push(['Gap', (tx_tst_target - (tx_tst_target<0 ? tx_tst : 0))])
-                // tx_target_title = ["results","gap"]
-                console.log({hts_target: hts_target, pst_target: pst_target, tx_target: tx_target})
-                plot_Donut('TX_NEW_TARGET', sub_title, '', tx_target, 'Tx New target')
-
-
-            })
-
-            // Graph Three   - Tx New
-            const plotGraph_3 = (groupby) => {
-                p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:cZLvFP8qm5H;ee6p52I4oZo&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
-                .then(response=>{    
-                    let data  = [["Tx New", 'Target']]
-                    let map_filter = []
-
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else {
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
-                    
-                    map_filter.map(o_pe=>{
-                        let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'cZLvFP8qm5H')  || [0, 0, 0, 0, 0, 0]
-                        let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'ee6p52I4oZo')  || [0, 0, 0, 0, 0, 0]
-
-                        let v_alue1 = parseFloat(v1_[5]) || 0
-                        let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        val_arr.push(v_alue1)  // not linked
-                        val_arr.push(v_alue2)  // tx_new
-
-                        data.push(val_arr)
-                    })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                                
-                    let x_array = []
-                    let y_data = []
-
-                    y_data[0] = {}
-                    y_data[0].name = "Tx New"
-                    y_data[0].color = colours[1]
-                    y_data[0].data = []
-
-
-                    y_data[1] = {}
-                    y_data[1].name = "Target"
-                    y_data[1].color = colours[2]
-                    y_data[1].type = 'spline'
-                    y_data[1].yAxis = 1
-                    y_data[1].data = []
-
-                
-                    let target2 = document.getElementById("TX_NEW")
-                    let sta = data
-                    let sta_titles = sta.shift()
-                    sta.map(dt=>{
-                        x_array.push(dt[0]);
-                        y_data[0].data.push(dt[1])
-                        y_data[1].data.push(dt[2])
-                    })
-                    
-                    plotStacked(x_array, "Period", y_data, "Numbers","TX NEW", period_string, target2, 'column', colours, true, "Target %")
-                })  
-            }
-
-            // dataTable Data - TX New)
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:cZLvFP8qm5H;ee6p52I4oZo&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:HfVjCurKxh2&displayProperty=NAME`,{})
-            .then(response=>{   
-                mechan_name = []
-                txnew = []
-                target = []
-                linkage=[]
-            
-                const testing = $('#T_TX_NEW').DataTable(context)
-                testing.clear()
-                response.metaData.dimensions.lRp2LBbTuM5.map((m_pe,indx)=>{
-                    mechan = response.metaData.items[m_pe].name
-                    v_1 = response.rows.find(r_=>r_[0]==='cZLvFP8qm5H' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_2 = response.rows.find(r_=>r_[0]==='ee6p52I4oZo' && r_[1]==m_pe) || [0,0,0,0,0] 
-
-                    val_arr1 = parseFloat(v_1[4]) || 0  // txnew
-                    val_arr2 = parseFloat(v_2[4]) || 0  // target
-
-
-                    txnew.push(val_arr1)
-                    target.push(val_arr2)
-                    mechan_name.push(mechan)
-                    
-                })
-                let contributions = getContrib(txnew,txnew) // HTS_TST / (HTS_TST => TOTAl)
-                // // comsole.log(mechan_name)
-                counter3  = 1
-                mechan_name.map((me_pe,indx) => {
-                    if(active_partners_name.includes(me_pe)){    
-                    testing.row.add([counter3 ,me_pe, txnew[indx].toLocaleString(), target[indx].toLocaleString(), contributions[indx]+" %"]).draw(false);
-                    counter3 ++
-                    }
-                });     
-            })
-            
-
-            // Graph Four   - Tx Curr
-            //  Donuts 5
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:GijOCrZWery;MUrG8qxf74d&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${finalpe}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`,{})
-            .then(response => {
-                let hts_arr1 = []
-                let hts_arr2 = []
-                let hts_target = []
-
-                let pst_arr1 = []
-                let pst_arr2 = []
-                let pst_target = []
-
-                let tx_arr1 = []
-                let tx_arr2 = []
-                let tx_target = []
-
-                let sub_title = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                response.metaData.dimensions.pe.map(o_pe=>{
-                    // Donut 4
-                    hts_1 = response.rows.find(r_=>r_[0]==='GijOCrZWery' && r_[3] === o_pe) || 0
-                    hts_2 = response.rows.find(r_=>r_[0]==='MUrG8qxf74d' && r_[3] === o_pe) || 0
-
-                    hts_val1 = parseFloat(hts_1[4]) || 0   
-                    hts_val2 = parseFloat(hts_2[4]) || 0   
-
-                    hts_arr1.push(hts_val1)
-                    hts_arr2.push(hts_val2)
-            
-                })
-                // Donut 4
-                hts_tst = sum_list(hts_arr1)
-                hts_tst_target = sum_list(hts_arr2)
-
-                hts_target.push(['Results', hts_tst])
-                hts_target.push(['Gap', (hts_tst_target - (hts_tst_target>0 ? hts_tst : 0))])
-
-                plot_Donut('TX_CURR_TARGET',sub_title,'', hts_target,'TX CURR Target')
-
-            })
-
-
-            // Graph Four   - Tx Curr
-            const plotGraph_4 = (groupby) => {
-                p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:GijOCrZWery;MUrG8qxf74d&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
-                .then(response=>{    
-                    let data  = [["Tx New", 'Target']]
-                    let map_filter = []
-
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else {
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
-                
-                    map_filter.map(o_pe=>{
-                        let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'GijOCrZWery')  || [0, 0, 0, 0, 0, 0]
-                        let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'MUrG8qxf74d')  || [0, 0, 0, 0, 0, 0]
-
-                        let v_alue1 = parseFloat(v1_[5]) || 0
-                        let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        val_arr.push(v_alue1)  // TX CURR
-                        // val_arr.push(3000)  // TX CURR Target
-                        val_arr.push(v_alue2)  // TX CURR Target
-
-                        data.push(val_arr)
-                    })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                            
-                    let x_array = []
-                    let y_data = []
-
-                    y_data[0] = {}
-                    y_data[0].name = "TX CURR"
-                    y_data[0].color = colours[1]
-                    y_data[0].data = []
-
-
-                    y_data[1] = {}
-                    y_data[1].name = "TX CURR Target"
-                    y_data[1].color = colours[5]
-                    y_data[1].type = 'spline'
-                    // y_data[1].yAxis = 0
-                    y_data[1].data = []
-
-                
-                    let target2 = document.getElementById("TX_CURR")
-                    let sta = data
-                    let sta_titles = sta.shift()
-                    sta.map(dt=>{
-                        x_array.push(dt[0]);
-                        y_data[0].data.push(dt[1])
-                        y_data[1].data.push(dt[2])
-                    })
-                    
-                    plotStacked(x_array, "Period", y_data, "Numbers","TX CURR", period_string, target2, 'column', colours, true, "")
-                })
-            }
-
-            // dataTable Data - TX Curr
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:GijOCrZWery;MUrG8qxf74d&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:HfVjCurKxh2&displayProperty=NAME`,{})
-            .then(response=>{   
-                mechan_name = []
-                txcurr = []
-                target = []
-                linkage=[]
-            
-                const testing = $('#T_TX_CURR').DataTable(context)
-                testing.clear()
-                response.metaData.dimensions.lRp2LBbTuM5.map((m_pe,indx)=>{
-                    mechan = response.metaData.items[m_pe].name
-                    v_1 = response.rows.find(r_=>r_[0]==='GijOCrZWery' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_2 = response.rows.find(r_=>r_[0]==='MUrG8qxf74d' && r_[1]==m_pe) || [0,0,0,0,0] 
-
-                    val_arr1 = parseFloat(v_1[4]) || 0  // TX CURR
-                    val_arr2 = parseFloat(v_2[4]) || 0  // target
-
-
-                    txcurr.push(val_arr1)
-                    target.push(val_arr2)
-                    mechan_name.push(mechan)
-                    
-                })
-                let contributions = getContrib(txcurr,txcurr) // HTS_TST / (HTS_TST => TOTAl)
-                // // comsole.log(mechan_name)
-                counter4  = 1
-                mechan_name.map((me_pe,indx) => {
-                    if(active_partners_name.includes(me_pe)){    
-                    testing.row.add([counter4 ,me_pe, txcurr[indx].toLocaleString(), target[indx].toLocaleString(), contributions[indx]+" %"]).draw(false);
-                    counter4 ++
-                    }
-                });     
-            })
-
-            // Graph Five   - Tx Crude Retention
-            const plotGraph_5 = (groupby) => {
-                p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:sBIsMTbnGcT;KruJ6FeQRVm&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
-                .then(response=>{    
-                    let data  = [["Targeted Crude Retention", 'Crude Retention']]
-                    let map_filter = []
-
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else {
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
-                
-                    map_filter.map(o_pe=>{
-                        let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'sBIsMTbnGcT')  || [0, 0, 0, 0, 0, 0]
-                        let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'KruJ6FeQRVm')  || [0, 0, 0, 0, 0, 0]
-
-                        let v_alue1 = parseFloat(v1_[5]) || 0
-                        let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        val_arr.push(v_alue1)  // Targeted Crude Retention
-                        // val_arr.push(3000)  // Targeted Crude Retention
-                        val_arr.push(v_alue2)  //  Crude Retention
-                        // val_arr.push(2000)  //  Crude Retention
-
-                        data.push(val_arr)
-                    })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                            
-                    let x_array = []
-                    let y_data = []
-
-                    y_data[0] = {}
-                    y_data[0].name = "Targeted Crude Retention"
-                    y_data[0].color = colours[1]
-                    y_data[0].data = []
-
-
-                    y_data[1] = {}
-                    y_data[1].name = "Crude Retention"
-                    y_data[1].color = colours[5]
-                    // y_data[1].type = 'spline'
-                    // y_data[1].yAxis = 0
-                    y_data[1].data = []
-
-                
-                    let target2 = document.getElementById("TX_CURR_CRUDE")
-                    let sta = data
-                    let sta_titles = sta.shift()
-                    sta.map(dt=>{
-                        x_array.push(dt[0]);
-                        y_data[0].data.push(dt[1])
-                        y_data[1].data.push(dt[2])
-                    })
-                    console.log('#############################################################################################################')
-                    console.log({xData: x_array, yData: y_data})
-                    plotStacked(x_array, "Period", y_data, "Percentage","Crude Retention", period_string, target2, 'line', colours, true, "")
-                })
-            }
-
-            // Graph Six   - Tx Crude Retention
-            const plotGraph_6 = (groupby) => {
-                p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:KSQFY7RrQXn&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
-                .then(response=>{    
-                    let data  = [["TX Net New"]]
-                    let map_filter = []
-
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else {
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
-                    
-                    map_filter.map(o_pe=>{
-                        let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'KSQFY7RrQXn')  || [0, 0, 0, 0, 0, 0]
-                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'KruJ6FeQRVm')  || [0, 0, 0, 0, 0, 0]
-
-                        let v_alue1 = parseFloat(v1_[5]) || 0
+                        let v_alue1 = parseFloat(v1_[3]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
 
-                        val_arr.push(v_alue1)  // Targeted Crude Retention
-                        // val_arr.push(-3000)  //  Crude Retention
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
@@ -1030,13 +499,22 @@
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "TX Net New"
+                    y_data[0].name = "HTS POS"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
 
 
-                        
-                    let target2 = document.getElementById("NET_NEW")
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'spline'
+                    y_data[1].data = []
+
+                    
+
+
+                
+                    let target2 = document.getElementById("hts-tst-pos")
                     let sta = data
                     let sta_titles = sta.shift()
                     sta.map(dt=>{
@@ -1044,138 +522,70 @@
                         y_data[0].data.push(dt[1])
                         // y_data[1].data.push(dt[2])
                     })
+
+                   
+
+                    // indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+
+                    // x_array = indicator_name
+
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+                    console.log('Get the data' + indicatorsVal)
+
+
+                    // calculate the percentage of each divided by the first indicator
+
+
+                    let percentageCalculate = []
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data.pop()
+
+                    console.log( y_data[1].data[0])
+
+                    console.log(y_data)
+
+
+                    console.log('percentage issss hehehe  ' + percentageCalculate)
+
+
                     
-                    plotStacked(x_array, "Period", y_data, "","Net New", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Indicator", y_data, "","HTS_TST_POS", period_string, target2, 'column', colours, true, "")
                 })
             }
 
-            // Graph Seven   - Tx MMD
-            const plotGraph_7 = (groupby) => {
-                p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:bDeAaqXZDiF;oP7iAShkNJO;zRvK9pfx1Mw&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
-                .then(response=>{    
-                    let data  = [["TX Curr <3 months","TX Curr 3 -5 months","TX Curr 6+ months"]]
-                    let map_filter = []
-
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else {
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
-                    
-                    map_filter.map(o_pe=>{
-                        let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'bDeAaqXZDiF')  || [0, 0, 0, 0, 0, 0]
-                        let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'oP7iAShkNJO')  || [0, 0, 0, 0, 0, 0]
-                        let v3_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'zRvK9pfx1Mw')  || [0, 0, 0, 0, 0, 0]
-
-                        let v_alue1 = parseFloat(v1_[5]) || 0
-                        let v_alue2 = parseFloat(v2_[5]) || 0
-                        let v_alue3 = parseFloat(v3_[5]) || 0
-
-                        val_arr.push(v_alue1)  // not linked
-                        val_arr.push(v_alue2)  // tx_new
-                        val_arr.push(v_alue3)  // tx_new
-
-                        data.push(val_arr)
-                    })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                                
-                    let x_array = []
-                    let y_data = []
-
-                    y_data[0] = {}
-                    y_data[0].name = "TX Curr <3 months"
-                    y_data[0].color = colours[1]
-                    y_data[0].data = []
 
 
-                    y_data[1] = {}
-                    y_data[1].name = "TX Curr 3 -5 months"
-                    y_data[1].color = colours[2] 
-                    y_data[1].data = []
 
 
-                    y_data[2] = {}
-                    y_data[2].name = "TX Curr 6+ months"
-                    y_data[2].color = colours[3]
-                    y_data[2].data = []
-
-                
-                    let target2 = document.getElementById("TX_MMD")
-                    let sta = data
-                    let sta_titles = sta.shift()
-                    sta.map(dt=>{
-                        x_array.push(dt[0]);
-                        y_data[0].data.push(dt[1])
-                        y_data[1].data.push(dt[2])
-                        y_data[2].data.push(dt[3])
-                    })
-                    
-                    plotStacked(x_array, "Period", y_data, "Percentage","TX MMD", period_string, target2, 'column', colours, true, "")
-                })
-            }
-
-            
-                
-
-            // Graph Eig   - Prep New
-            //  Donuts 6
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:V5DtZ4LCOtA;lb9SYI1zQhr&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${finalpe}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`,{})
-            .then(response => {
-                console.log(response)
-                    let hts_arr1 = []
-                    let hts_arr2 = []
-                    let hts_target = []
-
-                    let pst_arr1 = []
-                    let pst_arr2 = []
-                    let pst_target = []
-
-                    let tx_arr1 = []
-                    let tx_arr2 = []
-                    let tx_target = []
-
-                    let sub_title = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                    response.metaData.dimensions.pe.map(o_pe=>{
-                        // Donut 6
-                        hts_1 = response.rows.find(r_=>r_[0]==='V5DtZ4LCOtA' && r_[3] === o_pe) || 0
-                        hts_2 = response.rows.find(r_=>r_[0]==='lb9SYI1zQhr' && r_[3] === o_pe) || 0
-
-                        hts_val1 = parseFloat(hts_1[4]) || 0   
-                        hts_val2 = parseFloat(hts_2[4]) || 0   
-
-                        hts_arr1.push(hts_val1)
-                        hts_arr2.push(hts_val2)
-                
-                    })
-                    // Donut 6
-                    hts_tst = sum_list(hts_arr1)
-                    hts_tst_target = sum_list(hts_arr2)
-
-                    hts_target.push(['Results', hts_tst])
-                    hts_target.push(['Gap', (hts_tst_target - (hts_tst_target>0 ? hts_tst : 0))])
-
-                    plot_Donut('PREP_NEW_TARGET',sub_title,'', hts_target,'Prep New')
-
-            })
-
-
-            // Graph Eight   - Prep New
-            const plotGraph_8 = (groupby) => {
+            const plotGraph_2 = (groupby) => {
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
+                // console.log({graph: p_o_pe})
                 justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:HfVjCurKxh2&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
                 .then(response=>{    
 
-                    console.log({response})
-                    let data  = [["DQA Visuals"]]
+                    // console.log({response})
+                    let data  = [["TX_NEW"]]
                     let map_filter = response.metaData.dimensions.dx
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
@@ -1188,7 +598,7 @@
                     //     }
                     // }
 
-                    console.log(map_filter)
+                    // console.log(map_filter)
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
@@ -1198,8 +608,8 @@
                         let v_alue1 = parseFloat(v1_[4]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
 
-                        console.log('........................................................................................................................')
-                        console.log({v1_, v_alue1})
+                        // console.log('........................................................................................................................')
+                        // console.log({v1_, v_alue1})
 
                         val_arr.push(v_alue1)  
                         // val_arr.push(v_alue2)  
@@ -1217,7 +627,7 @@
                     y_data[0].data = []
 
                 
-                    let target2 = document.getElementById("PREP_NEW")
+                    let target2 = document.getElementById("tx-new")
                     let sta = data
                     let sta_titles = sta.shift()
                     sta.map(dt=>{
@@ -1228,120 +638,52 @@
 
                    
 
-                    // indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
 
-                    // x_array = indicator_name
+                    x_array = indicator_name
 
-                    console.log({x_array, y_data})
+                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Indicator", y_data, "","DQA Visuals", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Indicator", y_data, "","TX_NEW", period_string, target2, 'column', colours, true, "")
                 })
             }
 
-            // dataTable Data - Prep New
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:V5DtZ4LCOtA;lb9SYI1zQhr&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:HfVjCurKxh2&displayProperty=NAME`,{})
-            .then(response=>{ 
-                mechan_name = []
-                txcurr = []
-                target = []
-                linkage=[]
-            
-                const testing = $('#T_PREP_NEW').DataTable(context)
-                testing.clear()
-                response.metaData.dimensions.lRp2LBbTuM5.map((m_pe,indx)=>{
-                    mechan = response.metaData.items[m_pe].name
-                    v_1 = response.rows.find(r_=>r_[0]==='V5DtZ4LCOtA' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_2 = response.rows.find(r_=>r_[0]==='lb9SYI1zQhr' && r_[1]==m_pe) || [0,0,0,0,0] 
-
-                    val_arr1 = parseFloat(v_1[4]) || 0 
-                    val_arr2 = parseFloat(v_2[4]) || 0 
-
-
-                    txcurr.push(val_arr1)
-                    target.push(val_arr2)
-                    mechan_name.push(mechan)
-                    
-                })
-                let contributions = getContrib(txcurr,txcurr) // HTS_TST / (HTS_TST => TOTAl)
-                // // comsole.log(mechan_name)
-                counter6  = 1
-                mechan_name.map((me_pe,indx) => {
-                    if(active_partners_name.includes(me_pe)){    
-                    testing.row.add([counter6 ,me_pe, txcurr[indx].toLocaleString(), target[indx].toLocaleString(), contributions[indx]+" %"]).draw(false);
-                    counter6 ++
-                    }
-                });     
-            })
-                    
-                    
-
-            // Graph Nine   - VMMC
-            //  Donuts 7
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QWwcD6qUM4C;mWTMqx2POUD&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${finalpe}&filter=ou:${org_unit}&displayProperty=NAME&outputIdScheme=UID`,{})
-            .then(response => {
-                let hts_arr1 = []
-                let hts_arr2 = []
-                let hts_target = []
-
-                let pst_arr1 = []
-                let pst_arr2 = []
-                let pst_target = []
-
-                let tx_arr1 = []
-                let tx_arr2 = []
-                let tx_target = []
-
-                let sub_title = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
-                response.metaData.dimensions.pe.map(o_pe=>{
-                    // Donut 7
-                    hts_1 = response.rows.find(r_=>r_[0]==='QWwcD6qUM4C' && r_[3] === o_pe) || 0
-                    hts_2 = response.rows.find(r_=>r_[0]==='mWTMqx2POUD' && r_[3] === o_pe) || 0
-
-                    hts_val1 = parseFloat(hts_1[4]) || 0   
-                    hts_val2 = parseFloat(hts_2[4]) || 0   
-
-                    hts_arr1.push(hts_val1)
-                    hts_arr2.push(hts_val2)
-            
-                })
-                // Donut 7
-                hts_tst = sum_list(hts_arr1)
-                hts_tst_target = sum_list(hts_arr2)
-
-                hts_target.push(['Results', hts_tst])
-                hts_target.push(['Gap', (hts_tst_target - (hts_tst_target>0 ? hts_tst : 0))])
-
-                plot_Donut('VMMC_TARGET',sub_title,'', hts_target,'VMMC Target')
-
-            })
-
-
-            // Graph Nine   - Prep new
-            const plotGraph_9 = (groupby) => {
+            const plotGraph_3 = (groupby) => {
+                // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QWwcD6qUM4C;mWTMqx2POUD&dimension=YwixV1ZlnnS:${funding_age}&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:LEVEL-${p_o_pe[1]};${org_unit}&displayProperty=NAME`,{})
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_3_MONTHS&displayProperty=NAME`,{})
                 .then(response=>{    
-                    let data  = [["VMMC CIRC"]]
-                    let map_filter = []
 
-                    if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
-                        map_filter = active_partners_code
-                    }else {
-                        try{
-                            map_filter = response.metaData.dimensions[p_o_pe[2]]
-                        }catch (err){
-                            console.log(err)
-                        }
-                    }
+                    // console.log({response})
+                    let data  = [["TB_Prev(N)"]]
+                    let map_filter = response.metaData.dimensions.dx
+
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'GijOCrZWery')  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[5]) || 0
+                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        // let v_alue2 = parseFloat(v2_[5]) || 0
 
-                        val_arr.push(v_alue1)  // TX CURR
+                        // console.log('........................................................................................................................')
+                        // console.log({v1_, v_alue1})
+
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
@@ -1351,58 +693,323 @@
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "VMMC CIRC"
+                    y_data[0].name = "HTS POS"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
 
                 
-                    let target2 = document.getElementById("VMCC_CIRC")
+                    let target2 = document.getElementById("tb-prev")
                     let sta = data
                     let sta_titles = sta.shift()
                     sta.map(dt=>{
                         x_array.push(dt[0]);
                         y_data[0].data.push(dt[1])
+                        // y_data[1].data.push(dt[2])
                     })
+
+                   
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+
+                    x_array = indicator_name
+
+                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Period", y_data, "","VMMC", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Indicator", y_data, "","TB_Prev(N)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
-            // dataTable Data - VMCC
-            justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QWwcD6qUM4C;mWTMqx2POUD&dimension=lRp2LBbTuM5:${mechanism}&dimension=pe:${prd}&dimension=ou:HfVjCurKxh2&displayProperty=NAME`,{})
-            .then(response=>{   
-                mechan_name = []
-                txcurr = []
-                target = []
-                linkage=[]
-            
-                const testing = $('#T_VMCC_CIRC').DataTable(context)
-                testing.clear()
-                response.metaData.dimensions.lRp2LBbTuM5.map((m_pe,indx)=>{
-                    mechan = response.metaData.items[m_pe].name
-                    v_1 = response.rows.find(r_=>r_[0]==='QWwcD6qUM4C' && r_[1]==m_pe) || [0,0,0,0,0] 
-                    v_2 = response.rows.find(r_=>r_[0]==='mWTMqx2POUD' && r_[1]==m_pe) || [0,0,0,0,0] 
 
-                    val_arr1 = parseFloat(v_1[4]) || 0  // TX CURR
-                    val_arr2 = parseFloat(v_2[4]) || 0  // target
+            const plotGraph_4 = (groupby) => {
+                // console.log('check this one here....................................................................................')
+                p_o_pe = groupBy(groupby)
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_12_MONTHS&displayProperty=NAME`,{})
+                .then(response=>{    
 
+                    // console.log({response})
+                    let data  = [["PMTCT_HEI_POS (0-2 months)"]]
+                    let map_filter = response.metaData.dimensions.dx
 
-                    txcurr.push(val_arr1)
-                    target.push(val_arr2)
-                    mechan_name.push(mechan)
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
                     
-                })
-                let contributions = getContrib(txcurr,txcurr) // HTS_TST / (HTS_TST => TOTAl)
-                // // comsole.log(mechan_name)
-                counter7  = 1
-                mechan_name.map((me_pe,indx) => {
-                    if(active_partners_name.includes(me_pe)){    
-                    testing.row.add([counter7 ,me_pe, txcurr[indx].toLocaleString(), target[indx].toLocaleString(), contributions[indx]+" %"]).draw(false);
-                    counter7 ++
-                    }
-                });     
-            })
+                    map_filter.map(o_pe=>{
+                        let val_arr = [response.metaData.items[o_pe].name]
+                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
+                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        // let v_alue2 = parseFloat(v2_[5]) || 0
+
+                        // console.log('........................................................................................................................')
+                        // console.log({v1_, v_alue1})
+
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
+
+                        data.push(val_arr)
+                    })
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                            
+                    let x_array = []
+                    let y_data = []
+
+                    y_data[0] = {}
+                    y_data[0].name = "HTS POS"
+                    y_data[0].color = colours[1]
+                    y_data[0].data = []
+
+                
+                    let target2 = document.getElementById("pmtct-hei-younger")
+                    let sta = data
+                    let sta_titles = sta.shift()
+                    sta.map(dt=>{
+                        x_array.push(dt[0]);
+                        y_data[0].data.push(dt[1])
+                        // y_data[1].data.push(dt[2])
+                    })
+
+                   
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+
+                    x_array = indicator_name
+
+                    // console.log({x_array, y_data})
+                    
+                    plotStacked(x_array, "Indicator", y_data, "","PMTCT_HEI_POS (0-2 months)", period_string, target2, 'column', colours, true, "")
+                })
+            }
+
+
+
+            const plotGraph_5 = (groupby) => {
+                // console.log('check this one here....................................................................................')
+                p_o_pe = groupBy(groupby)
+                console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
+                .then(response=>{    
+
+                    // console.log({response})
+                    let data  = [["PMTCT_HEI_POS (>2 -12 months)"]]
+                    let map_filter = response.metaData.dimensions.dx
+
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
+                    
+                    map_filter.map(o_pe=>{
+                        let val_arr = [response.metaData.items[o_pe].name]
+                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
+
+                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        // let v_alue2 = parseFloat(v2_[5]) || 0
+
+                        // console.log('........................................................................................................................')
+                        // console.log({v1_, v_alue1})
+
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
+
+                        data.push(val_arr)
+                    })
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                            
+                    let x_array = []
+                    let y_data = []
+
+                    y_data[0] = {}
+                    y_data[0].name = "HTS POS"
+                    y_data[0].color = colours[1]
+                    y_data[0].data = []
+
+                
+                    let target2 = document.getElementById("pmtct-hei-older")
+                    let sta = data
+                    let sta_titles = sta.shift()
+                    sta.map(dt=>{
+                        x_array.push(dt[0]);
+                        y_data[0].data.push(dt[1])
+                        // y_data[1].data.push(dt[2])
+                    })
+
+                   
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+
+                    x_array = indicator_name
+
+                    // console.log({x_array, y_data})
+                    
+                    plotStacked(x_array, "Indicator", y_data, "","PMTCT_HEI_POS (>2 -12 months)", period_string, target2, 'column', colours, true, "")
+                })
+            }
+
+            const plotGraph_6 = (groupby) => {
+                // console.log('check this one here....................................................................................')
+                p_o_pe = groupBy(groupby)
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
+                .then(response=>{    
+
+                    // console.log({response})
+                    let data  = [["VMMC_CIRC"]]
+                    let map_filter = response.metaData.dimensions.dx
+
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
+                    
+                    map_filter.map(o_pe=>{
+                        let val_arr = [response.metaData.items[o_pe].name]
+                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
+
+                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        // let v_alue2 = parseFloat(v2_[5]) || 0
+
+                        // console.log('........................................................................................................................')
+                        // console.log({v1_, v_alue1})
+
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
+
+                        data.push(val_arr)
+                    })
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                            
+                    let x_array = []
+                    let y_data = []
+
+                    y_data[0] = {}
+                    y_data[0].name = "HTS POS"
+                    y_data[0].color = colours[1]
+                    y_data[0].data = []
+
+                
+                    let target2 = document.getElementById("vmmc-circ")
+                    let sta = data
+                    let sta_titles = sta.shift()
+                    sta.map(dt=>{
+                        x_array.push(dt[0]);
+                        y_data[0].data.push(dt[1])
+                        // y_data[1].data.push(dt[2])
+                    })
+
+                   
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+
+                    x_array = indicator_name
+
+                    // console.log({x_array, y_data})
+                    
+                    plotStacked(x_array, "Indicator", y_data, "","VMMC_CIRC", period_string, target2, 'column', colours, true, "")
+                })
+            }
+
+
+            const plotGraph_7 = (groupby) => {
+                // console.log('check this one here....................................................................................')
+                p_o_pe = groupBy(groupby)
+                console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
+                .then(response=>{    
+
+                    // console.log({response})
+                    let data  = [["Prep New"]]
+                    let map_filter = response.metaData.dimensions.dx
+
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
+                    
+                    map_filter.map(o_pe=>{
+                        let val_arr = [response.metaData.items[o_pe].name]
+                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
+
+                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        // let v_alue2 = parseFloat(v2_[5]) || 0
+
+                        // console.log('........................................................................................................................')
+                        // console.log({v1_, v_alue1})
+
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
+
+                        data.push(val_arr)
+                    })
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                            
+                    let x_array = []
+                    let y_data = []
+
+                    y_data[0] = {}
+                    y_data[0].name = "Prep New"
+                    y_data[0].color = colours[1]
+                    y_data[0].data = []
+
+                
+                    let target2 = document.getElementById("prep-new")
+                    let sta = data
+                    let sta_titles = sta.shift()
+                    sta.map(dt=>{
+                        x_array.push(dt[0]);
+                        y_data[0].data.push(dt[1])
+                        // y_data[1].data.push(dt[2])
+                    })
+
+                   
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+
+                    x_array = indicator_name
+
+                    // console.log({x_array, y_data})
+                    
+                    plotStacked(x_array, "Indicator", y_data, "","VMMC_CIRC", period_string, target2, 'column', colours, true, "")
+                })
+            }
+           
+            
+
+            
             if (this_val_groupby===null){
                 plotGraph_1('pe');
                 plotGraph_2('pe');
@@ -1412,7 +1019,7 @@
                 plotGraph_6('pe');
                 plotGraph_7('pe');
                 plotGraph_8('pe');
-                plotGraph_9('pe');
+              
             }
             else{
                 plotGraph_1(this_val_groupby)
@@ -1423,7 +1030,7 @@
                 plotGraph_6(this_val_groupby)
                 plotGraph_7(this_val_groupby)
                 plotGraph_8(this_val_groupby)
-                plotGraph_9(this_val_groupby)
+                
             }
             
             $("#groupby-dropdown").on('change', function (ev) {        
@@ -1436,7 +1043,7 @@
                 plotGraph_6(v_al)
                 plotGraph_7(v_al)
                 plotGraph_8(v_al)
-                plotGraph_9(v_al)
+                
 
             })
         
@@ -1490,37 +1097,37 @@
             switch (reference) {
               
               case 1:
-                  $("#TX_NEW_DIV, #TX_CURR_DIV, #NET_NEW_DIV,#TX_MMD_DIV, #PREP_NEW_DIV, #VMMC_DIV").hide();
-                  $("#HTS").show();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").hide();
+                  $("#HTS_TST_POS").show();
                   
                 break;
               case 2:
-                  $("#HTS, #TX_CURR_DIV, #NET_NEW_DIV,#TX_MMD_DIV, #PREP_NEW_DIV, #VMMC_DIV").hide();
-                  $("#TX_NEW_DIV").show();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").hide();
+                  $("#TX_NEW").show();
                 break;
               case 3:
-                  $("#HTS, TX_NEW_DIV, #HTS, #NET_NEW_DIV,#TX_MMD_DIV, #PREP_NEW_DIV, #VMMC_DIV").hide();
-                  $("#TX_CURR_DIV").show();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").hide();
+                  $("#TB_PREV").show();
                 break;
               case 4:
-                  $("#HTS, #TX_NEW_DIV, #TX_CURR_DIV, #TX_MMD_DIV, #PREP_NEW_DIV, #VMMC_DIV").hide();
-                  $("#NET_NEW_DIV").show();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").hide();
+                  $("#PMTCT_HEI_POS_YOUNGER").show();
                 break;
               case 5:
-                  $("#HTS, #TX_NEW_DIV, #TX_CURR_DIV, #NET_NEW_DIV, #PREP_NEW_DIV, #VMMC_DIV").hide();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").hide();
                   $("#TX_MMD_DIV").show();
                 break;
               case 6:
-                  $("#HTS, #TX_NEW_DIV, #TX_CURR_DIV, #NET_NEW_DIV, #TX_MMD_DIV, #VMMC_DIV").hide();
-                  $("#PREP_NEW_DIV").show();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").hide();
+                  $("#VMMC_CIRC").show();
                 break;
               case 7:
-                  $("#HTS, #TX_NEW_DIV, #TX_CURR_DIV, #NET_NEW_DIV, #TX_MMD_DIV, #PREP_NEW_DIV").hide();
-                  $("#VMMC_DIV").show();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").hide();
+                  $("#PREP_NEW").show();
                 break;
               default:
                   //$("#main-wrapper").show();
-                  $("#HTS, #TX_NEW_DIV, #TX_CURR_DIV, #NET_NEW_DIV, #TX_MMD_DIV, #PREP_NEW_DIV, #VMMC_DIV").show();
+                  $("#HTS_TST_POS, #TX_NEW, #TB_PREV,#PMTCT_HEI_POS_YOUNGER, #PMTCT_HEI_POS_OLDER, #VMMC_CIRC", "#PREP_NEW").show();
             }
         });
     });

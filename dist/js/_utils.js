@@ -325,12 +325,6 @@ let plotStacked = (
       // valueSuffix: '',
       headerFormat: "<b>{point.x}</b><br/>",
       pointFormat: "{series.name}: {point.y}<br/>Total: {points.y}",
-      // formatter: function(){
-      //     if (this.series.index == 0){
-      //         return this.x + '</br>' + 'Amount: '+  this.y
-      //     }else if( chartype === "column") {
-      //         return this.x + '</br>' + 'Amount: '+ this.y + '</br>' + 'Percent: ' + parseFloat(((this.y / this.series.chart.series[0].points[this.point.index].y)* 100).toFixed(1)) + ' %'
-      // }},
     },
     series: y_data,
     colors: colo,
