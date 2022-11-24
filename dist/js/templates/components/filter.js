@@ -518,7 +518,7 @@ const fetchSubcounties = county_id => {
         arr_of_counties.push(county_id)
     }
     arr_of_counties.map(c_id=>{
-        justFetch(`https://indextestingapp.uonbi.ac.ke/api/organisationUnits/${c_id}.json?includeChildren=true&fields=id,name`, {})
+        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${c_id}.json?includeChildren=true&fields=id,name`, {})
         .then(response=>{
             if( response.error ){
                 throw JSON.stringify(response)
@@ -546,7 +546,7 @@ const fetchwards = scounty_id => {
         arr_of_scounties.push(scounty_id)
     }
     arr_of_scounties.map(sc_id=>{
-        justFetch(`https://indextestingapp.uonbi.ac.ke/api/organisationUnits/${sc_id}.json?includeChildren=true&fields=id,name`, {})
+        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${sc_id}.json?includeChildren=true&fields=id,name`, {})
         .then(response=>{
             if( response.error ){
                 throw JSON.stringify(response)
@@ -574,7 +574,7 @@ const fetchFacilities = scounty_id => {
         arr_of_facilities.push(scounty_id)
     }
     arr_of_facilities.map(sc_id=>{
-        justFetch(`https://indextestingapp.uonbi.ac.ke/api/organisationUnits/${sc_id}.json?includeChildren=true&fields=id,name`, {})
+        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${sc_id}.json?includeChildren=true&fields=id,name`, {})
         .then(response=>{
             if( response.error ){
                 throw JSON.stringify(response)

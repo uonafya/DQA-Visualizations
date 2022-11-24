@@ -430,7 +430,7 @@
                 return finalperiodName
             }
 
-            let colours = ["#8B0000", "#1e77bf", "#008000", "#2A2E79","#ffa54c","#3d3939","#7b00ff"]
+            let colours = ["#8B0000", "#1e77bf", "#f40707", "#2A2E79","#ffa54c","#3d3939","#7b00ff"]
 
             // For Datatable settings
             let context = {
@@ -525,13 +525,17 @@
                     y_data[0].name = "HTS POS"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
+                    y_data[0].pointPlacement = -0.2
+                    y_data[0].linkedTo = 'main'
 
 
                     y_data[1] = {}
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
+                    y_data[1].pointPlacement = -0.2
 
 
 
@@ -639,6 +643,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis =  1
                     y_data[1].data = []
 
 
@@ -743,6 +748,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -849,6 +855,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -955,6 +962,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1059,6 +1067,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1164,6 +1173,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1268,6 +1278,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1372,6 +1383,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1481,7 +1493,7 @@
         
         var opt = {
             margin:       0,
-            filename:     'HFR - '+(new Date().toLocaleDateString("en-US", date_options))+'.pdf',
+            filename:     'HIV DQA - '+(new Date().toLocaleDateString("en-US", date_options))+'.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2 },
             pagebreak:    {mode: ['avoid-all','css','legacy']},

@@ -1,6 +1,6 @@
 {
-    "version": "0.1.14",
-    "name": "Partner Reporting Dashboard alpha",
+    "version": "0.1.1",
+    "name": "HIV DQA 2022 VISUALS",
     "description": "An App to Visualize USAID IM Indicators",
     "launch_path": "html/index.html",
     "appType": "APP",
