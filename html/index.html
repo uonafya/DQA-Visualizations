@@ -307,8 +307,6 @@
             renderStatus(page_status)
         }
     </script>
-    <!-- render Fn -->
-    <!-- TEMPLATING -->
 
 
     <script type="text/javascript" src="../dist/js/_utils.js"></script>
@@ -331,7 +329,7 @@
             // // console.log('>>>>>'+prd)
             if (prop && prop.pe) {
                 prd = prop.pe
-                // // // comsole.log('a here')
+                // // // console.log('a here')
                 
 
             }
@@ -432,7 +430,7 @@
                 return finalperiodName
             }
 
-            let colours = ["#8B0000", "#1e77bf", "#008000", "#2A2E79","#ffa54c","#3d3939","#7b00ff"]
+            let colours = ["#8B0000", "#1e77bf", "#f40707", "#2A2E79","#ffa54c","#3d3939","#7b00ff"]
 
             // For Datatable settings
             let context = {
@@ -487,14 +485,13 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:oKm3aRzOqEA&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:2022Q3&filter=ou:HfVjCurKxh2&filter=lRp2LBbTuM5&displayProperty=NAME`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:oKm3aRzOqEA&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:THIS_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
-
                     // console.log({response})
                     let data  = [["HTS_TST_POS"]]
                     let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
-                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    // if(p_o_pe[1]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
                     //     map_filter = active_partners_code
                     // }else {
                     //     try{
@@ -504,7 +501,7 @@
                     //     }
                     // }
 
-                    // console.log(map_filter)
+
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
@@ -528,13 +525,17 @@
                     y_data[0].name = "HTS POS"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
+                    y_data[0].pointPlacement = -0.2
+                    y_data[0].linkedTo = 'main'
 
 
                     y_data[1] = {}
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
+                    y_data[1].pointPlacement = -0.2
 
 
 
@@ -574,6 +575,10 @@
 
                     y_data[1].data = y_data[1].data[0]
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
@@ -591,7 +596,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:S2CxYpkDi6j&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=CODE`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:S2CxYpkDi6j&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=CODE`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -638,6 +643,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis =  1
                     y_data[1].data = []
 
 
@@ -678,6 +684,10 @@
 
                     y_data[1].data = y_data[1].data[0]
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
@@ -691,7 +701,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:JSUvdRq5TeM&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:JSUvdRq5TeM&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -738,6 +748,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -780,6 +791,10 @@
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     x_array = indicator_name
 
                     
@@ -793,7 +808,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:iMdfdPDeYNV&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:iMdfdPDeYNV&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -840,6 +855,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -882,6 +898,10 @@
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     x_array = indicator_name
 
                     
@@ -895,7 +915,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QTQ8Hl3mhMS&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QTQ8Hl3mhMS&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -942,6 +962,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -982,6 +1003,10 @@
 
                     y_data[1].data = y_data[1].data[0]
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
@@ -995,7 +1020,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:pusrFZgSCjV&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:pusrFZgSCjV&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -1042,6 +1067,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1082,6 +1108,10 @@
 
                     y_data[1].data = y_data[1].data[0]
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
@@ -1096,7 +1126,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:q5n4DKZapTN&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:q5n4DKZapTN&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -1143,6 +1173,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1185,6 +1216,10 @@
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     x_array = indicator_name
 
                     
@@ -1196,7 +1231,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:BNlo09iEtzC&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:BNlo09iEtzC&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -1243,6 +1278,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1285,6 +1321,10 @@
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
+
                     x_array = indicator_name
 
                     
@@ -1296,7 +1336,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:I1if79R1YMj&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:I1if79R1YMj&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -1343,6 +1383,7 @@
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
                     y_data[1].type = 'scatter'
+                    y_data[1].yAxis = 1
                     y_data[1].data = []
 
 
@@ -1382,6 +1423,10 @@
                     })
 
                     y_data[1].data = y_data[1].data[0]
+
+                    y_data[1].data.map((y,i)=>{
+                        y_data[1].data[i] = parseFloat(y.toFixed(2))
+                    })
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
@@ -1448,7 +1493,7 @@
         
         var opt = {
             margin:       0,
-            filename:     'HFR - '+(new Date().toLocaleDateString("en-US", date_options))+'.pdf',
+            filename:     'HIV DQA - '+(new Date().toLocaleDateString("en-US", date_options))+'.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2 },
             pagebreak:    {mode: ['avoid-all','css','legacy']},

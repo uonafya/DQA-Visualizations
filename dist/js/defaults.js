@@ -5,7 +5,7 @@ function myOU() {
     var my_county;
     var my_subcounty;
     $.ajax({
-        url:'https://indextestingapp.uonbi.ac.ke/api/me.json',
+        url:'https://partnermanagementsystem.uonbi.ac.ke/api/me.json',
         // url:'https://json.link/oXqJ2CQ4c1.json',
         async: false,
         data: '',
@@ -16,7 +16,7 @@ function myOU() {
             var level;
             $.ajax({
                 type: "GET",
-                url: "https://indextestingapp.uonbi.ac.ke/api/organisationUnits/"+my_data_ou+".json",
+                url: "https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/"+my_data_ou+".json",
                 async: false,
                 data: "fields=ancestors,level",
                 success: function (response) {

@@ -4,7 +4,7 @@ const header_template = `
         <a class="nav-toggler waves-effect waves-light d-block text-black fcblack d-md-none" href="javascript:void(0)" >
             <i class="ti-menu ti-close"></i>
         </a>
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="/">
             <span class="logo-text">
                 <img src="../assets/images/prd.png" style="max-height: 56px" alt="homepage" class="light-logo" />
             </span>
