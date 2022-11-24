@@ -104,7 +104,7 @@
             <div id="save_pdf">
                 
                 <div id="HTS_TST_POS">
-                        <!-- <div class="col-md-12">
+                        <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">HTS TST POS</h4>
@@ -113,7 +113,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
 
                     <div id="TX_NEW">
@@ -146,8 +146,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">PMTCT HEI POS (0-2 months)</h4>
-                                    <div class="graph" id="pmtct-hei-younger">
+                                    <h4 class="card-title">PMTC HEI POS (0-2 months)</h4>
+                                    <div class="graph" id="pmtc-hei-younger">
 
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">PMTCT HEI POS (>2-12 months)</h4>
-                                    <div class="graph" id="pmtct-hei-older">
+                                    <div class="graph" id="pmtc-hei-older">
 
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">VMMC Circ</h4>
+                                    <h4 class="card-title">VMMC CICR</h4>
                                     <div class="graph" id="vmmc-circ">
 
                                     </div>
@@ -186,8 +186,34 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Prep New</h4>
+                                    <h4 class="card-title">PrEP NEW</h4>
                                     <div class="graph" id="prep-new">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="PREP_NEW">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">TX_ML</h4>
+                                    <div class="graph" id="tx-ml">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="PREP_NEW">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">TX RTT</h4>
+                                    <div class="graph" id="tx-rtt">
 
                                     </div>
                                 </div>
@@ -456,7 +482,7 @@
             }
 
 
-            // Graph    - Prep New
+            // Graph 1 - HTS_TST_POS
             const plotGraph_1 = (groupby) => {
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
@@ -493,7 +519,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
                             
                     let x_array = []
                     let y_data = []
@@ -507,10 +533,9 @@
                     y_data[1] = {}
                     y_data[1].name = "Percentage %"
                     y_data[1].color = colours[2]
-                    y_data[1].type = 'spline'
+                    y_data[1].type = 'scatter'
                     y_data[1].data = []
 
-                    
 
 
                 
@@ -523,11 +548,6 @@
                         // y_data[1].data.push(dt[2])
                     })
 
-                   
-
-                    // indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
-
-                    // x_array = indicator_name
 
                     // console.log('........................................................................................................................')
 
@@ -542,13 +562,7 @@
                             indicatorsVal.push(yd)
                         })
                     })
-                    console.log('Get the data' + indicatorsVal)
 
-
-                    // calculate the percentage of each divided by the first indicator
-
-
-                    let percentageCalculate = []
 
                     y_data.map(y=>{
                         let percentage = []
@@ -558,18 +572,14 @@
                         y_data[1].data.push(percentage)
                     })
 
-                    y_data[1].data.pop()
+                    y_data[1].data = y_data[1].data[0]
 
-                    console.log( y_data[1].data[0])
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
-                    console.log(y_data)
-
-
-                    console.log('percentage issss hehehe  ' + percentageCalculate)
-
+                    x_array = indicator_name
 
                     
-                    plotStacked(x_array, "Indicator", y_data, "","HTS_TST_POS", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","HTS_TST_POS", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -581,12 +591,12 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:HfVjCurKxh2&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:S2CxYpkDi6j&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=CODE`,{})
                 .then(response=>{    
 
                     // console.log({response})
                     let data  = [["TX_NEW"]]
-                    let map_filter = response.metaData.dimensions.dx
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
                     //     map_filter = active_partners_code
@@ -602,29 +612,35 @@
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
                         // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        let v_alue1 = parseFloat(v1_[3]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        // console.log('........................................................................................................................')
-                        // console.log({v1_, v_alue1})
 
                         val_arr.push(v_alue1)  
                         // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name 
                             
                     let x_array = []
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "HTS POS"
+                    y_data[0].name = "TX_NEW"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
+
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
 
                 
                     let target2 = document.getElementById("tx-new")
@@ -636,15 +652,38 @@
                         // y_data[1].data.push(dt[2])
                     })
 
-                   
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
 
-                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Indicator", y_data, "","TX_NEW", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","TX NEW", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -652,12 +691,12 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_3_MONTHS&displayProperty=NAME`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:JSUvdRq5TeM&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["TB_Prev(N)"]]
-                    let map_filter = response.metaData.dimensions.dx
+                    let data  = [["TB_PREV (N)"]]
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
                     //     map_filter = active_partners_code
@@ -673,29 +712,35 @@
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
                         // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        let v_alue1 = parseFloat(v1_[3]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        // console.log('........................................................................................................................')
-                        // console.log({v1_, v_alue1})
 
                         val_arr.push(v_alue1)  
                         // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
                             
                     let x_array = []
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "HTS POS"
+                    y_data[0].name = "TB_PREV (N)"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
+
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
 
                 
                     let target2 = document.getElementById("tb-prev")
@@ -707,29 +752,53 @@
                         // y_data[1].data.push(dt[2])
                     })
 
-                   
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
 
-                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Indicator", y_data, "","TB_Prev(N)", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","TB_PREV (N)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
+            //Graph 4 - PMTC_HEI_POS (0-2 months)
 
             const plotGraph_4 = (groupby) => {
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_12_MONTHS&displayProperty=NAME`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:iMdfdPDeYNV&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["PMTCT_HEI_POS (0-2 months)"]]
-                    let map_filter = response.metaData.dimensions.dx
+                    let data  = [["PMTC_HEI_POS (0-2 months)"]]
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
                     //     map_filter = active_partners_code
@@ -745,32 +814,38 @@
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
                         // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        let v_alue1 = parseFloat(v1_[3]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        // console.log('........................................................................................................................')
-                        // console.log({v1_, v_alue1})
 
                         val_arr.push(v_alue1)  
                         // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
                             
                     let x_array = []
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "HTS POS"
+                    y_data[0].name = "PMTC_HEI_POS (0-2 months)"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
 
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
+
                 
-                    let target2 = document.getElementById("pmtct-hei-younger")
+                    let target2 = document.getElementById("pmtc-hei-younger")
                     let sta = data
                     let sta_titles = sta.shift()
                     sta.map(dt=>{
@@ -779,15 +854,38 @@
                         // y_data[1].data.push(dt[2])
                     })
 
-                   
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
 
-                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Indicator", y_data, "","PMTCT_HEI_POS (0-2 months)", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","PMTC_HEI_POS (0-2 months)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -796,13 +894,13 @@
             const plotGraph_5 = (groupby) => {
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QTQ8Hl3mhMS&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["PMTCT_HEI_POS (>2 -12 months)"]]
-                    let map_filter = response.metaData.dimensions.dx
+                    let data  = [["PMTC_HEI_POS (>2-12 months)"]]
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
                     //     map_filter = active_partners_code
@@ -818,32 +916,38 @@
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
                         // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        let v_alue1 = parseFloat(v1_[3]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        // console.log('........................................................................................................................')
-                        // console.log({v1_, v_alue1})
 
                         val_arr.push(v_alue1)  
                         // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
                             
                     let x_array = []
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "HTS POS"
+                    y_data[0].name = "PMTC_HEI_POS (>2-12 months)"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
 
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
+
                 
-                    let target2 = document.getElementById("pmtct-hei-older")
+                    let target2 = document.getElementById("pmtc-hei-older")
                     let sta = data
                     let sta_titles = sta.shift()
                     sta.map(dt=>{
@@ -852,15 +956,38 @@
                         // y_data[1].data.push(dt[2])
                     })
 
-                   
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
 
-                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Indicator", y_data, "","PMTCT_HEI_POS (>2 -12 months)", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","PMTC_HEI_POS (>2-12 months)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -868,12 +995,12 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:pusrFZgSCjV&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
                     let data  = [["VMMC_CIRC"]]
-                    let map_filter = response.metaData.dimensions.dx
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
                     //     map_filter = active_partners_code
@@ -889,29 +1016,35 @@
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
                         // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        let v_alue1 = parseFloat(v1_[3]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        // console.log('........................................................................................................................')
-                        // console.log({v1_, v_alue1})
 
                         val_arr.push(v_alue1)  
                         // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
                             
                     let x_array = []
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "HTS POS"
+                    y_data[0].name = "VMMC_CIRC"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
+
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
 
                 
                     let target2 = document.getElementById("vmmc-circ")
@@ -923,15 +1056,38 @@
                         // y_data[1].data.push(dt[2])
                     })
 
-                   
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
 
-                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Indicator", y_data, "","VMMC_CIRC", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","VMMC_CIRC", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -939,13 +1095,13 @@
             const plotGraph_7 = (groupby) => {
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
-                console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:HlagDtQy2K2;n8wHDPitQYy;fPZoJ5MwbN1;G2i9RuZAnHz&dimension=ou:${org_unit}&dimension=lRp2LBbTuM5&dimension=pe:LAST_6_MONTHS&displayProperty=NAME`,{})
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:q5n4DKZapTN&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["Prep New"]]
-                    let map_filter = response.metaData.dimensions.dx
+                    let data  = [["PrEP New"]]
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
                     //     map_filter = active_partners_code
@@ -961,29 +1117,35 @@
                     
                     map_filter.map(o_pe=>{
                         let val_arr = [response.metaData.items[o_pe].name]
-                        let v1_ = response.rows.find(r_=>r_[0]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
                         // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
 
-                        let v_alue1 = parseFloat(v1_[4]) || 0
+                        let v_alue1 = parseFloat(v1_[3]) || 0
                         // let v_alue2 = parseFloat(v2_[5]) || 0
-
-                        // console.log('........................................................................................................................')
-                        // console.log({v1_, v_alue1})
 
                         val_arr.push(v_alue1)  
                         // val_arr.push(v_alue2)  
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
                             
                     let x_array = []
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "Prep New"
+                    y_data[0].name = "VMMC_CIRC"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
+
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
 
                 
                     let target2 = document.getElementById("prep-new")
@@ -995,15 +1157,238 @@
                         // y_data[1].data.push(dt[2])
                     })
 
-                   
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'DHIS', 'DATIM']
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
                     x_array = indicator_name
 
-                    // console.log({x_array, y_data})
                     
-                    plotStacked(x_array, "Indicator", y_data, "","VMMC_CIRC", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","PrEP New", period_string, target2, 'column', colours, true, "")
+                })
+            }
+
+            const plotGraph_8 = (groupby) => {
+                // console.log('check this one here....................................................................................')
+                p_o_pe = groupBy(groupby)
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:BNlo09iEtzC&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                .then(response=>{    
+
+                    // console.log({response})
+                    let data  = [["TX_ML"]]
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
+
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
+                    
+                    map_filter.map(o_pe=>{
+                        let val_arr = [response.metaData.items[o_pe].name]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
+
+                        let v_alue1 = parseFloat(v1_[3]) || 0
+                        // let v_alue2 = parseFloat(v2_[5]) || 0
+
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
+
+                        data.push(val_arr)
+                    })
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                            
+                    let x_array = []
+                    let y_data = []
+
+                    y_data[0] = {}
+                    y_data[0].name = "TX_ML"
+                    y_data[0].color = colours[1]
+                    y_data[0].data = []
+
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
+
+                
+                    let target2 = document.getElementById("tx-ml")
+                    let sta = data
+                    let sta_titles = sta.shift()
+                    sta.map(dt=>{
+                        x_array.push(dt[0]);
+                        y_data[0].data.push(dt[1])
+                        // y_data[1].data.push(dt[2])
+                    })
+
+
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
+
+                    x_array = indicator_name
+
+                    
+                    plotStacked(x_array, "Data Source", y_data, "","TX_ML", period_string, target2, 'column', colours, true, "")
+                })
+            }
+
+            const plotGraph_9 = (groupby) => {
+                // console.log('check this one here....................................................................................')
+                p_o_pe = groupBy(groupby)
+                // console.log({graph: p_o_pe})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:I1if79R1YMj&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&dimension=pe:LAST_QUARTER&filter=ou:HfVjCurKxh2&displayProperty=NAME&outputIdScheme=UID`,{})
+                .then(response=>{    
+
+                    // console.log({response})
+                    let data  = [["TX_RTT"]]
+                    let map_filter = response.metaData.dimensions.UWmoLhDe26q
+
+                    // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
+                    //     map_filter = active_partners_code
+                    // }else {
+                    //     try{
+                    //         map_filter = response.metaData.dimensions[p_o_pe[2]]
+                    //     }catch (err){
+                    //         console.log(err)
+                    //     }
+                    // }
+
+                    // console.log(map_filter)
+                    
+                    map_filter.map(o_pe=>{
+                        let val_arr = [response.metaData.items[o_pe].name]
+                        let v1_ = response.rows.find(r_=>r_[1]===o_pe)  || [0, 0, 0, 0, 0, 0]
+                        // let v2_ = response.rows.find(r_=>r_[p_o_pe[0]]===o_pe && r_[0] === 'lb9SYI1zQhr')  || [0, 0, 0, 0, 0, 0]
+
+                        let v_alue1 = parseFloat(v1_[3]) || 0
+                        // let v_alue2 = parseFloat(v2_[5]) || 0
+
+                        val_arr.push(v_alue1)  
+                        // val_arr.push(v_alue2)  
+
+                        data.push(val_arr)
+                    })
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                            
+                    let x_array = []
+                    let y_data = []
+
+                    y_data[0] = {}
+                    y_data[0].name = "TX_RTT"
+                    y_data[0].color = colours[1]
+                    y_data[0].data = []
+
+
+                    y_data[1] = {}
+                    y_data[1].name = "Percentage %"
+                    y_data[1].color = colours[2]
+                    y_data[1].type = 'scatter'
+                    y_data[1].data = []
+
+
+
+                
+                    let target2 = document.getElementById("tx-rtt")
+                    let sta = data
+                    let sta_titles = sta.shift()
+                    sta.map(dt=>{
+                        x_array.push(dt[0]);
+                        y_data[0].data.push(dt[1])
+                        // y_data[1].data.push(dt[2])
+                    })
+
+
+                    // console.log('........................................................................................................................')
+
+                    // console.log(y_data)
+
+                    let indicatorsVal = []
+
+
+                    // push all the data in y_data to percentageCalculate
+                    y_data.map(y=>{
+                        y.data.map(yd=>{
+                            indicatorsVal.push(yd)
+                        })
+                    })
+
+
+                    y_data.map(y=>{
+                        let percentage = []
+                        y.data.map(yd=>{
+                            percentage.push((yd/indicatorsVal[0])*100)
+                        })
+                        y_data[1].data.push(percentage)
+                    })
+
+                    y_data[1].data = y_data[1].data[0]
+
+                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
+
+                    x_array = indicator_name
+
+                    
+                    plotStacked(x_array, "Data Source", y_data, "","TX_RTT", period_string, target2, 'column', colours, true, "")
                 })
             }
            
@@ -1019,6 +1404,7 @@
                 plotGraph_6('pe');
                 plotGraph_7('pe');
                 plotGraph_8('pe');
+                plotGraph_9('pe');
               
             }
             else{
@@ -1030,6 +1416,7 @@
                 plotGraph_6(this_val_groupby)
                 plotGraph_7(this_val_groupby)
                 plotGraph_8(this_val_groupby)
+                plotGraph_9(this_val_groupby)
                 
             }
             
@@ -1042,6 +1429,7 @@
                 plotGraph_5(v_al)
                 plotGraph_6(v_al)
                 plotGraph_7(v_al)
+                plotGraph_8(v_al)
                 plotGraph_8(v_al)
                 
 
