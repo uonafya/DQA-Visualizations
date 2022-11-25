@@ -576,7 +576,18 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+                        // y_data[1].data[i] = 0
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
+
+
+                    console.log('........................................................................................................................')
+                    console.log(y_data[1].data)
+
+                    
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
 
