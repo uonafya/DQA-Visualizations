@@ -584,9 +584,6 @@
                     })
 
 
-                    console.log('........................................................................................................................')
-                    console.log(y_data[1].data)
-
                     
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
@@ -697,6 +694,11 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
@@ -804,6 +806,11 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
                     x_array = indicator_name
@@ -911,6 +918,11 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
                     x_array = indicator_name
@@ -1016,6 +1028,10 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
@@ -1121,6 +1137,10 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
@@ -1229,6 +1249,11 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
                     x_array = indicator_name
@@ -1332,6 +1357,11 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
 
@@ -1438,6 +1468,11 @@
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
+
+                        if (y_data[1].data[i] === 0){
+                            y_data[1].data[i] = null
+                            return
+                        }
                     })
 
                     indicator_name = ['Register/KenyaEMR', 'MOH 731']
