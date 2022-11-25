@@ -257,6 +257,18 @@ let plotStacked = (
     legend: {
       enabled: legendable,
     },
+    // legend: {
+    //   align: "left",
+    //   x: 0,
+    //   verticalAlign: "bottom",
+    //   y: 20,
+    //   floating: true,
+    //   backgroundColor:
+    //     Highcharts.defaultOptions.legend.backgroundColor || "white",
+    //   borderColor: "#CCC",
+    //   borderWidth: 1,
+    //   shadow: false,
+    // },
     subtitle: {
       text: subtitle || null,
     },
@@ -301,6 +313,7 @@ let plotStacked = (
         dataLabels: {
           enabled: true,
         },
+        allowPointSelect: true
       },
       line: {
         dataLabels: {
