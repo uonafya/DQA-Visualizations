@@ -287,7 +287,7 @@ let plotStacked = (
         // primary axis
         title: {
           useHTML: true,
-          text: 'concordance',
+          text: 'Number',
         },
         labels: {
           overflow: "justify",
@@ -298,7 +298,7 @@ let plotStacked = (
         // secondary axis
         title: {
           useHTML: true,
-          text: 'Percent',
+          text: '%  Concordance',
         },
         opposite: true,
         gridLineWidth: 0,
