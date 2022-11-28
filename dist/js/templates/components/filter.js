@@ -5,6 +5,8 @@ const filter_template = `
         <option selected disabled>Select Mechanism</option>
         <option selected="true" value="">All Partners</option>
         <option value = "jEtKvSdlHpK">USAID Imarisha Jamii</option>
+        <option value = "D7AS38Pze0F">USAID Dumisha Afya</option>
+        <option value = "bsD5HwKJjFS">USAID Ampath Uzima</option>
         <option value = "fBCEYe6pmaw">USAID Jamii Tekelezi</option>
         <option value = "ZP7695AsKWl">USAID Tujenge Jamii</option>
         <option value = "kF0bPRXWYHw">USAID Boresha Jamii</option>
