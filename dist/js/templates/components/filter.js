@@ -4,14 +4,12 @@ const filter_template = `
         <select class="form-control m-r-5 mb-1" id="mechanism-dropdown" name="mechanism">
         <option selected disabled>Select Mechanism</option>
         <option selected="true" value="">All Partners</option>
-        <option value = "jEtKvSdlHpK">USAID Imarisha Jamii</option>
         <option value = "D7AS38Pze0F">USAID Dumisha Afya</option>
         <option value = "bsD5HwKJjFS">USAID Ampath Uzima</option>
         <option value = "fBCEYe6pmaw">USAID Jamii Tekelezi</option>
         <option value = "ZP7695AsKWl">USAID Tujenge Jamii</option>
         <option value = "kF0bPRXWYHw">USAID Boresha Jamii</option>
         <option value = "DOVuNOK6W1q">USAID Nuru ya Mtoto</option>
-        <option value = "Gz7D5TtCtfA">USAID Tumikia Mtoto</option>
         <option value = "lt6GFMucPzG">USAID Fahari Ya Jamii</option>
         <option value = "mVoikQ8W4oc">USAID Stawisha Pwani</option> 
         </select> 
@@ -246,9 +244,19 @@ $(document).ready(function () {
     })
     $("#mechanism-dropdown").on('change', function (ev) {
         let v_al = $(this).val()
-        changeHashOnFilter({me:v_al})
-        $("#county-dropdown").empty()
-        fetchCounties(v_al)
+        // console.log(v_al)
+        if (v_al === undefined || v_al === null || v_al === '') {
+            $("#county-dropdown").empty()  // selectVal................................................................................................................................................................................................
+            // reload page
+            location.reload();
+            // empty county dropdown after reload
+            $("#county-dropdown").empty()    
+            // $("#county-dropdown").html(selectVal)
+        } else {
+            changeHashOnFilter({me:v_al})
+            $("#county-dropdown").empty()
+            fetchCounties(v_al)
+        }
     })
 
     
