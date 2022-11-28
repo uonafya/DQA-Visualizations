@@ -1379,7 +1379,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:I1if79R1YMj&dimension=UWmoLhDe26q:cKZDPWaSacf;Ku9fUMBfDia&dimension=lRp2LBbTuM5&filter=ou:${org_unit}&filter=pe:202207;202208;202209&displayProperty=NAME`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:I1if79R1YMj&dimension=UWmoLhDe26q:cKZDPWaSacf;Ku9fUMBfDia&dimension=lRp2LBbTuM5:${mechanism}&filter=ou:${org_unit}&filter=pe:202207;202208;202209&displayProperty=NAME`,{})
                 .then(response=>{    
 
                     // console.log({response})
