@@ -1,57 +1,24 @@
 const filter_template = `
-
+{{#is_mechanism}}
+    <div class="col-md-2 col-sm-2 col-xs-2">
+        <select class="form-control m-r-5 mb-1" id="mechanism-dropdown" name="mechanism">
+        <option selected disabled>Select Mechanism</option>
+        <option selected="true" value="">All Partners</option>
+        <option value = "jEtKvSdlHpK">USAID Imarisha Jamii</option>
+        <option value = "fBCEYe6pmaw">USAID Jamii Tekelezi</option>
+        <option value = "ZP7695AsKWl">USAID Tujenge Jamii</option>
+        <option value = "kF0bPRXWYHw">USAID Boresha Jamii</option>
+        <option value = "DOVuNOK6W1q">USAID Nuru ya Mtoto</option>
+        <option value = "Gz7D5TtCtfA">USAID Tumikia Mtoto</option>
+        <option value = "lt6GFMucPzG">USAID Fahari Ya Jamii</option>
+        <option value = "mVoikQ8W4oc">USAID Stawisha Pwani</option> 
+        </select> 
+    </div> 
+{{/is_mechanism}}
 {{#is_county}}
     <div class="col-md-2 col-sm-2 col-xs-6">
         <select class="form-control m-r-5 mb-1" id="county-dropdown" name="county"  placeholder="Select county" title="Select county">
-            <!--<option selected="true" disabled="" value="">Select County</option>-->
-            <option selected="true" value="HfVjCurKxh2">Kenya</option>
-            <option value="vvOK1BxTbet">Baringo County</option>
-            <option value="HMNARUV2CW4">Bomet County</option>
-            <option value="KGHhQ5GLd4k">Bungoma County</option>
-            <option value="Tvf1zgVZ0K4">Busia County</option>
-            <option value="MqnLxQBigG0">Elgeyo Marakwet County</option>
-            <option value="PFu8alU2KWG">Embu County</option>
-            <option value="uyOrcHZBpW0">Garissa County</option>
-            <option value="nK0A12Q7MvS">Homa Bay County</option>
-            <option value="bzOfj0iwfDH">Isiolo County</option>
-            <option value="Hsk1YV8kHkT">Kajiado County</option>
-            <option value="BjC1xL40gHo">Kakamega County</option>
-            <option value="ihZsJ8alvtb">Kericho County</option>
-            <option value="qKzosKQPl6G">Kiambu County</option>
-            <option value="nrI2khZx3d0">Kilifi County</option>
-            <option value="Ulj33KBau7V">Kirinyaga County</option>
-            <option value="sPkRcDvhGWA">Kisii County</option>
-            <option value="tAbBVBbueqD">Kisumu County</option>
-            <option value="j8o6iO4Njsi">Kitui County</option>
-            <option value="N7YETT3A9r1">Kwale County</option>
-            <option value="xuFdFy6t9AH">Laikipia County</option>
-            <option value="NjWSbQTwys4">Lamu County</option>
-            <option value="yhCUgGcCcOo">Machakos County</option>
-            <option value="BoDytkJQ4Qi">Makueni County</option>
-            <option value="R6f9znhg37c">Mandera County</option>
-            <option value="Eey8fT4Im3y">Marsabit County</option>
-            <option value="Y52XNJ50hYb">Meru County</option>
-            <option value="fVra3Pwta0Q">Migori County</option>
-            <option value="wsBsC6gjHvn">Mombasa County</option>
-            <option value="ahwTMNAJvrL">Muranga County</option>
-            <option value="jkG3zaihdSs">Nairobi County</option>
-            <option value="ob6SxuRcqU4">Nakuru County</option>
-            <option value="t0J75eHKxz5">Nandi County</option>
-            <option value="kqJ83J2D72s">Narok County</option>
-            <option value="uepLTG8wGWJ">Nyamira County</option>
-            <option value="mYZacFNIB3h">Nyandarua County</option>
-            <option value="ptWVfaCIdVx">Nyeri County</option>
-            <option value="o36zCRjSd4G">Samburu County</option>
-            <option value="u4t9H8XyU9P">Siaya County</option>
-            <option value="QyGNX2DpR4h">Taita Taveta County</option>
-            <option value="JsH2bnvNt2d">Tana River County</option>
-            <option value="T4urHM47nlm">Tharaka Nithi County</option>
-            <option value="mThvosEflAU">Trans Nzoia County</option>
-            <option value="kphDeKClFch">Turkana County</option>
-            <option value="pZqQRRW7PHP">Uasin Gishu County</option>
-            <option value="sANMZ3lpqGs">Vihiga County</option>
-            <option value="CeLsrJOH0g9">Wajir County</option>
-            <option value="XWALbfAPa6n">West Pokot County</option>
+            
         </select>
     </div>
 {{/is_county}}
@@ -79,35 +46,7 @@ const filter_template = `
         </select> 
     </div> 
 {{/is_facility}}
-{{#is_mechanism}}
-    <div class="col-md-2 col-sm-2 col-xs-2">
-        <select class="form-control m-r-5 mb-1" id="mechanism-dropdown" name="mechanism">
-        <option selected disabled>Select Mechanism</option>
-        <option selected="true" value="">All Partners</option>
-        <option value="MZQY1ZPAYCY">Afya Jijini project</option>
-        <option value = "iI8P1gEpTxf">Afya Kamilisha</option>
-        <option value = "XakDkEteZ8n">Afya Nyota ya Bonde</option>
-        <option value = "vUO19dBpTi6">Afya Ziwani</option>
-        <option value = "WqRU554b9Ax">Afya Pwani</option>
-        <option value = "SuIPMBE1tdx">AMPATH Plus</option>
-        <option value = "iRFEcXxX5yb">Lea Toto Program</option>
-        <option value = "XazGLsdcppg">USAID Tujitegemee</option>
-        <option value = "jEtKvSdlHpK">USAID Imarisha Jamii</option>
-        <option value = "fBCEYe6pmaw">USAID Jamii Tekelezi</option>
-        <option value = "I77vRIqUthh">USAID Tujengee Jamii</option>
-        <option value = "kF0bPRXWYHw">USAID Boresha Jamii</option>
-        <option value = "DOVuNOK6W1q">USAID Nuru ya Mtoto</option>
-        <option value = "Gz7D5TtCtfA">USAID Tumikia Mtoto</option>
-        <option value = "is09NROcUeR">USAID4TheChild</option>
-        <option value = "lt6GFMucPzG">USAID Fahari Ya Jamii</option>
-        <option value = "mVoikQ8W4oc">USAID Stawisha Pwani</option>
 
-        
-
-
-        </select> 
-    </div> 
-{{/is_mechanism}}
 {{#is_period}}
     <div class="col-md-6">
         <div class="row">
@@ -252,6 +191,9 @@ const filter_template = `
 `;
 
 $(document).ready(function () {
+    $("#county-dropdown").html(ke_counties)
+
+
     $("#county-dropdown").on('change', function (ev) {
         let v_al = $(this).val()
         if(v_al != "HfVjCurKxh2"){
@@ -294,6 +236,8 @@ $(document).ready(function () {
     $("#mechanism-dropdown").on('change', function (ev) {
         let v_al = $(this).val()
         changeHashOnFilter({me:v_al})
+        $("#county-dropdown").empty()
+        fetchCounties(v_al)
     })
 
     
@@ -590,3 +534,53 @@ const fetchFacilities = scounty_id => {
         })
     })
 }
+
+const fetchCounties = mechanism_id => {
+    $("#county-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
+    let arr_of_facilities = []
+    if(typeof mechanism_id == 'object'){
+        arr_of_facilities = mechanism_id
+    }else
+    if(typeof mechanism_id == 'string' && mechanism_id.includes(',')){
+        arr_of_facilities = mechanism_id.split(',')
+    }else{
+        arr_of_facilities.push(mechanism_id)
+    }
+    arr_of_facilities.map(sc_id=>{
+        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022`, {})
+        .then(response=>{
+            if( response.error ){
+                throw JSON.stringify(response)
+            }
+            let ward = response.datavalues;
+            console.log(response)
+            ward.map(county=>{
+                if (county.ipuid === mechanism_id){
+                    $("#county-dropdown").append('<option value="'+county.countyuid+'">'+county.county_name+'</option>')
+                }
+            })
+            $("#county-dropdown").removeAttr('disabled')
+        })
+        .catch(er=>{
+            console.error('error: '+er)
+        })
+    })
+}
+
+const ke_counties = `
+            <!--<option selected="true" disabled="" value="">Select County</option>-->
+            <option selected="true" value="HfVjCurKxh2">Kenya</option>
+            <option value="vvOK1BxTbet">Baringo County</option>
+            <option value="KGHhQ5GLd4k">Bungoma County</option>
+            <option value="Tvf1zgVZ0K4">Busia County</option>
+            <option value="Hsk1YV8kHkT">Kajiado County</option>
+            <option value="nrI2khZx3d0">Kilifi County</option>
+            <option value="tAbBVBbueqD">Kisumu County</option>
+            <option value="Y52XNJ50hYb">Meru County</option>
+            <option value="wsBsC6gjHvn">Mombasa County</option>
+            <option value="jkG3zaihdSs">Nairobi County</option>
+            <option value="ob6SxuRcqU4">Nakuru County</option>
+            <option value="T4urHM47nlm">Tharaka Nithi County</option>
+            <option value="pZqQRRW7PHP">Uasin Gishu County</option>
+            <option value="sANMZ3lpqGs">Vihiga County</option>
+`
