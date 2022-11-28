@@ -196,39 +196,48 @@ $(document).ready(function () {
     $("#county-dropdown").html(ke_counties)
 
 
-    $("#county-dropdown").on('change', function (ev) {
-        let v_al = $(this).val()
-        if(v_al != "HfVjCurKxh2"){
-            window.sessionStorage.setItem("ouFilterType", "county")
-        }
-        changeHashOnFilter({ou:v_al})
-        if(v_al != 'HfVjCurKxh2' && v_al != ''){
-            $("#subcounty-dropdown").removeAttr('disabled')
-            fetchSubcounties(v_al);
-        }else{
-            $("#subcounty-dropdown").attr('disabled', true)
-        }
-    })
+    // $("#county-dropdown").on('change', function (ev) {
+    //     let v_al = $(this).val()
+    //     if(v_al != "HfVjCurKxh2"){
+    //         window.sessionStorage.setItem("ouFilterType", "county")
+    //         console.log("Setting county filter")
+    //     }
+    //     changeHashOnFilter({ou:v_al})
+    //     if(v_al != 'HfVjCurKxh2' && v_al != ''){
+    //         $("#facility-dropdown").removeAttr('disabled')
+    //         fetchFacilities(v_al);
+    //     }else{
+    //         $("#facility-dropdown").attr('disabled', true)
+    //     }
+    // })
     
-    $("#subcounty-dropdown").on('change', function (ev) {
-        let v_al = $(this).val()
+    // $("#subcounty-dropdown").on('change', function (ev) {
+    //     let v_al = $(this).val()
         
-        window.sessionStorage.setItem("ouFilterType", "subcounty")
-        changeHashOnFilter({ou:v_al})
-        if(v_al != ''){
-            $("#ward-dropdown").removeAttr('disabled')
-            fetchwards(v_al)
-        }
+    //     window.sessionStorage.setItem("ouFilterType", "subcounty")
+    //     changeHashOnFilter({ou:v_al})
+    //     if(v_al != ''){
+    //         $("#ward-dropdown").removeAttr('disabled')
+    //         fetchwards(v_al)
+    //     }
        
-    })
+    // })
     
-    $("#ward-dropdown").on('change', function (ev) {
+    // $("#ward-dropdown").on('change', function (ev) {
+    //     let v_al = $(this).val()
+    //     changeHashOnFilter({ou:v_al})
+    //     if(v_al != ''){
+    //         $("#ward-dropdown").removeAttr('disabled')
+    //         fetchFacilities(v_al)
+    //     }
+    // })
+
+    $("#county-dropdown").on('change', function (ev) {
+        console.log("County dropdown changed")
         let v_al = $(this).val()
         changeHashOnFilter({ou:v_al})
-        if(v_al != ''){
-            $("#ward-dropdown").removeAttr('disabled')
-            fetchFacilities(v_al)
-        }
+        $("#facility-dropdown").empty()
+        fetchFacilities(v_al)
     })
     
     $("#facility-dropdown").on('change', function (ev) {
@@ -452,34 +461,34 @@ function setPeriodVal(pv) {
     $('#period-dropdownFrom').change()
 }
 
-const fetchSubcounties = county_id => {
-    $("#subcounty-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
-    let arr_of_counties = []
-    if(typeof county_id == 'object'){
-        arr_of_counties = county_id
-    }else
-    if(typeof county_id == 'string' && county_id.includes(',')){
-        arr_of_counties = county_id.split(',')
-    }else{
-        arr_of_counties.push(county_id)
-    }
-    arr_of_counties.map(c_id=>{
-        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${c_id}.json?includeChildren=true&fields=id,name`, {})
-        .then(response=>{
-            if( response.error ){
-                throw JSON.stringify(response)
-            }
-            let subc = response.organisationUnits;
-            subc.map(sc=>{
-                $("#subcounty-dropdown").append('<option value="'+sc.id+'">'+sc.name+'</option>')
-            })
-            $("#subcounty-dropdown").removeAttr('disabled')
-        })
-        .catch(er=>{
-            console.error('error: '+er)
-        })
-    })
-}
+// const fetchSubcounties = county_id => {
+//     $("#subcounty-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
+//     let arr_of_counties = []
+//     if(typeof county_id == 'object'){
+//         arr_of_counties = county_id
+//     }else
+//     if(typeof county_id == 'string' && county_id.includes(',')){
+//         arr_of_counties = county_id.split(',')
+//     }else{
+//         arr_of_counties.push(county_id)
+//     }
+//     arr_of_counties.map(c_id=>{
+//         justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${c_id}.json?includeChildren=true&fields=id,name`, {})
+//         .then(response=>{
+//             if( response.error ){
+//                 throw JSON.stringify(response)
+//             }
+//             let subc = response.organisationUnits;
+//             subc.map(sc=>{
+//                 $("#subcounty-dropdown").append('<option value="'+sc.id+'">'+sc.name+'</option>')
+//             })
+//             $("#subcounty-dropdown").removeAttr('disabled')
+//         })
+//         .catch(er=>{
+//             console.error('error: '+er)
+//         })
+//     })
+// }
 const fetchwards = scounty_id => {
     $("#ward-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
     let arr_of_scounties = []
@@ -508,33 +517,82 @@ const fetchwards = scounty_id => {
         })
     })
 }
-const fetchFacilities = scounty_id => {
-    $("#facility-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
+// const fetchFacilities = scounty_id => {
+
+//     console.log('fetching facilities for '+scounty_id)
+//     $("#facility-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
+
+//     let arr_of_facilities = []
+//     if(typeof scounty_id == 'object'){
+//         arr_of_facilities = scounty_id
+//     }else
+//     if(typeof scounty_id == 'string' && scounty_id.includes(',')){
+//         arr_of_facilities = scounty_id.split(',')
+//     }else{
+//         arr_of_facilities.push(scounty_id)
+//     }
+//     // console.log("Check the issue here")
+//     arr_of_facilities.map(sc_id=>{
+//         justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022`, {})
+//         .then(response=>{
+//             console.log(response.json)
+//             if( response.error ){
+//                 throw JSON.stringify(response)
+//             }
+//             let ward = response.datavalues2;
+//             console.log('check whats the issue with this filter....'+ward)
+
+//             ward.map(county=>{
+//                 if (county.facilityuid === scounty_id){
+//                     $("#facility-dropdown").append('<option value="'+county.facilityuid+'">'+county.facility_name+'</option>')
+//                 }
+//             })
+//             $("#facility-dropdown").removeAttr('disabled')
+//         })
+//         .catch(er=>{
+//             console.error('error: '+er)
+//         })
+//     })
+// }
+
+const fetchFacilities = county_id => {
+
+    console.log('fetching facilities')
+
+    $("#facility-dropdown").html('')
+
     let arr_of_facilities = []
-    if(typeof scounty_id == 'object'){
-        arr_of_facilities = scounty_id
+    if(typeof county_id == 'object'){
+        arr_of_facilities = county_id
     }else
-    if(typeof scounty_id == 'string' && scounty_id.includes(',')){
-        arr_of_facilities = scounty_id.split(',')
-    }else{
-        arr_of_facilities.push(scounty_id)
-    }
-    arr_of_facilities.map(sc_id=>{
-        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${sc_id}.json?includeChildren=true&fields=id,name`, {})
-        .then(response=>{
-            if( response.error ){
-                throw JSON.stringify(response)
-            }
-            let ward = response.organisationUnits;
-            ward.map(wrd=>{
-                $("#facility-dropdown").append('<option value="'+wrd.id+'">'+wrd.name+'</option>')
+        if(typeof county_id == 'string' && county_id.includes(',')){
+            arr_of_facilities = county_id.split(',')
+        }else{
+            arr_of_facilities.push(county_id)
+        }
+
+    arr_of_facilities.map(c_id=>{
+        justFetch('https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022')
+            .then(response=>{
+                console.log(response)
+                if( response.error ){
+                    throw JSON.stringify(response)
+                }
+                let facilities = response.datavalues2;
+                console.log(facilities)
+
+                facilities.map(facility=>{
+                    if (facility.countyuid === c_id){
+                        $("#facility-dropdown").append('<option value="'+facility.facilityuid+'">'+facility.facility_name+'</option>')
+                    }
+                })
+                $("#facility-dropdown").removeAttr('disabled')
             })
-            $("#facility-dropdown").removeAttr('disabled')
-        })
-        .catch(er=>{
-            console.error('error: '+er)
-        })
-    })
+            .catch(er=>{
+                console.error('error: '+er)
+            })
+    }
+    )
 }
 
 const fetchCounties = mechanism_id => {
@@ -551,11 +609,11 @@ const fetchCounties = mechanism_id => {
     arr_of_facilities.map(sc_id=>{
         justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022`, {})
         .then(response=>{
+            // console.log(response.datavalues)
             if( response.error ){
                 throw JSON.stringify(response)
             }
             let ward = response.datavalues;
-            console.log(response)
             ward.map(county=>{
                 if (county.ipuid === mechanism_id){
                     $("#county-dropdown").append('<option value="'+county.countyuid+'">'+county.county_name+'</option>')
@@ -568,6 +626,9 @@ const fetchCounties = mechanism_id => {
         })
     })
 }
+
+
+
 
 const ke_counties = `
             <!--<option selected="true" disabled="" value="">Select County</option>-->
