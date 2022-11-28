@@ -579,7 +579,8 @@ const fetchFacilities = county_id => {
                     throw JSON.stringify(response)
                 }
                 let facilities = response.datavalues2;
-                console.log(facilities)
+                // console.log(facilities)
+                $("#facility-dropdown").html(selectVal)
 
                 facilities.map(facility=>{
                     if (facility.countyuid === c_id){
@@ -614,6 +615,7 @@ const fetchCounties = mechanism_id => {
                 throw JSON.stringify(response)
             }
             let ward = response.datavalues;
+            $("#county-dropdown").html(selectVal)
             ward.map(county=>{
                 if (county.ipuid === mechanism_id){
                     $("#county-dropdown").append('<option value="'+county.countyuid+'">'+county.county_name+'</option>')
@@ -627,6 +629,8 @@ const fetchCounties = mechanism_id => {
     })
 }
 
+
+const selectVal = `<option selected="true" value="">Select...</option>`
 
 
 
