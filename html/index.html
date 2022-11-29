@@ -527,6 +527,18 @@
                     y_data[0].name = "HTS TST POS"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
+                    y_data[0].dataLabels = [{
+                        enabled: true,
+                        color: '#FFFFFF',
+                        inside: true,
+                        format: '{point.y:.0f}', // one decimal
+                        // aligned: center,
+                        y: 10, // 10 pixels down from the top
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }]
 
 
                     y_data[1] = {}
@@ -535,6 +547,17 @@
                     y_data[1].type = 'scatter'
                     y_data[1].yAxis =  1
                     y_data[1].data = []
+                    y_data[1].dataLabels = [{
+                        enabled: true,
+                        color: '#000',
+                        format: '{point.y:.0f}%',
+                        align: 'left',
+                        y: 10, // 10 pixels down from the top
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }]
 
 
 

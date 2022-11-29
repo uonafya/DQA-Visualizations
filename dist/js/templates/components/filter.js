@@ -566,7 +566,7 @@ const fetchFacilities = (county_id) => {
                 "</option>"
             );
           }
-          else if (facility.countyuid === "ip-sites" & facility.ipuid === $("#mechanism-dropdown").val()) {
+          else if ($("#county-dropdown").val() === "ip-sites" & facility.ipuid === $("#mechanism-dropdown").val()) {
             $("#facility-dropdown").append(
                 '<option value="' +
                   facility.facilityuid +
@@ -638,7 +638,7 @@ const fetchCounties = (mechanism_id) => {
   });
 };
 
-const selectVal = `<option selected="true" value="">Select County</option>`;
+const selectVal = `<option selected="true" value="">Select...</option>`;
 
 const allSites = `<option value="">All Sites...</option>`;
 
