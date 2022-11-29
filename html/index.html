@@ -518,7 +518,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name 
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -578,7 +578,7 @@
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
                         // y_data[1].data[i] = 0
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -636,7 +636,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name 
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -696,7 +696,7 @@
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
 
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -746,7 +746,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -808,7 +808,7 @@
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
 
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -858,7 +858,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -920,7 +920,7 @@
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
 
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -970,7 +970,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -1029,7 +1029,7 @@
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -1079,7 +1079,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -1138,7 +1138,7 @@
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -1189,7 +1189,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -1251,7 +1251,7 @@
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
 
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -1300,7 +1300,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -1360,7 +1360,7 @@
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
 
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })
@@ -1411,7 +1411,7 @@
 
                         data.push(val_arr)
                     })
-                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name
+                    let period_string = response.metaData.items[response.metaData.dimensions.ou[0]].name +" - "+ response.metaData.items[response.metaData.dimensions.pe[0]].name + ' - ' + response.metaData.items[response.metaData.dimensions.pe[response.metaData.dimensions.pe.length - 1]].name
                             
                     let x_array = []
                     let y_data = []
@@ -1471,7 +1471,7 @@
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
 
                         if (y_data[1].data[i] === 0){
-                            y_data[1].data[i] = null
+                            y_data[1].data[i] = 0
                             return
                         }
                     })

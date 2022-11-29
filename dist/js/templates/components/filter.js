@@ -8,7 +8,6 @@ const filter_template = `
         <option value = "bsD5HwKJjFS">USAID Ampath Uzima</option>
         <option value = "fBCEYe6pmaw">USAID Jamii Tekelezi</option>
         <option value = "ZP7695AsKWl">USAID Tujenge Jamii</option>
-        <option value = "kF0bPRXWYHw">USAID Boresha Jamii</option>
         <option value = "DOVuNOK6W1q">USAID Nuru ya Mtoto</option>
         <option value = "lt6GFMucPzG">USAID Fahari Ya Jamii</option>
         <option value = "mVoikQ8W4oc">USAID Stawisha Pwani</option> 
@@ -191,282 +190,265 @@ const filter_template = `
 `;
 
 $(document).ready(function () {
-    $("#county-dropdown").html(ke_counties)
+  $("#county-dropdown").html(ke_counties);
 
+  $("#county-dropdown").on("change", function (ev) {
+    console.log("County dropdown changed");
+    let v_al = $(this).val();
+    changeHashOnFilter({ ou: v_al });
+    $("#facility-dropdown").empty();
+    fetchFacilities(v_al);
+  });
 
-    // $("#county-dropdown").on('change', function (ev) {
-    //     let v_al = $(this).val()
-    //     if(v_al != "HfVjCurKxh2"){
-    //         window.sessionStorage.setItem("ouFilterType", "county")
-    //         console.log("Setting county filter")
-    //     }
-    //     changeHashOnFilter({ou:v_al})
-    //     if(v_al != 'HfVjCurKxh2' && v_al != ''){
-    //         $("#facility-dropdown").removeAttr('disabled')
-    //         fetchFacilities(v_al);
-    //     }else{
-    //         $("#facility-dropdown").attr('disabled', true)
-    //     }
-    // })
-    
-    // $("#subcounty-dropdown").on('change', function (ev) {
-    //     let v_al = $(this).val()
-        
-    //     window.sessionStorage.setItem("ouFilterType", "subcounty")
-    //     changeHashOnFilter({ou:v_al})
-    //     if(v_al != ''){
-    //         $("#ward-dropdown").removeAttr('disabled')
-    //         fetchwards(v_al)
-    //     }
-       
-    // })
-    
-    // $("#ward-dropdown").on('change', function (ev) {
-    //     let v_al = $(this).val()
-    //     changeHashOnFilter({ou:v_al})
-    //     if(v_al != ''){
-    //         $("#ward-dropdown").removeAttr('disabled')
-    //         fetchFacilities(v_al)
-    //     }
-    // })
-
-    $("#county-dropdown").on('change', function (ev) {
-        console.log("County dropdown changed")
-        let v_al = $(this).val()
-        changeHashOnFilter({ou:v_al})
-        $("#facility-dropdown").empty()
-        fetchFacilities(v_al)
-    })
-    
-    $("#facility-dropdown").on('change', function (ev) {
-        let v_al = $(this).val()
-        changeHashOnFilter({ou:v_al})
-    })
-    $("#mechanism-dropdown").on('change', function (ev) {
-        let v_al = $(this).val()
-        // console.log(v_al)
-        if (v_al === undefined || v_al === null || v_al === '') {
-            $("#county-dropdown").empty()  // selectVal................................................................................................................................................................................................
-            // reload page
-            location.reload();
-            // empty county dropdown after reload
-            $("#county-dropdown").empty()    
-            // $("#county-dropdown").html(selectVal)
-        } else {
-            changeHashOnFilter({me:v_al})
-            $("#county-dropdown").empty()
-            fetchCounties(v_al)
-        }
-    })
-
-    
-    
-    $("#period-dropdownFrom").on('change', function (ev) {
-        let v_al = $(this).val();
-        if(v_al.includes('/')){ v_al = v_al.replace('/', 'W') }
-        changeHashOnFilter({pe:v_al})
-        $('#period-dropdownFromQs').removeAttr('disabled')
-        $('#period-dropdownTo').removeAttr('disabled')
-        sessionStorage.removeItem("periodIsQuarters")
-        $($('#period-dropdownTo option')).each(function (ix, ele) {
-            if(ele.getAttribute('value') < v_al){
-                ele.setAttribute('disabled', true)
-            }
-        });
-    })
-    $("#period-dropdownFromQs").on('change', function (ev) {
-        sessionStorage.setItem("periodIsQuarters", true)
-        let p_val = $("#period-dropdownFrom").val()
-        let v_al = $(this).val();
-        let v_alq = []
-        let finalpe = p_val+v_al
-        v_alq.push(finalpe)
-    
-        
-
-        
-        // if(sessionStorage.getItem("isPeriodRange") === "false" || !sessionStorage.getItem("isPeriodRange") ){
-        //     v_alq = p_val+"Q"+v_al
-        // }else{
-        //     if(v_al != null && v_al != ""){
-        //         for (let d = 1; d <= parseFloat(v_al); d++) {
-        //             v_alq += p_val+"Q"+d+";"
-        //         }
-        //         v_alq = v_alq.substr(0,v_alq.length-1)
-        //     }
-        // }
-        console.log("fromQs = ", v_alq);
-        if(v_alq.includes('/')){ v_alq = v_alq.replace('/', 'W') }
-        changeHashOnFilter({pe:v_alq})
-        $('#period-dropdownToQs').removeAttr('disabled')
-    })
-    // $("#period-dropdownTo").on('change', function (ev) {
-    //     let v_al = $(this).val();
-    //     let v_al_fr = $('#period-dropdownFrom').val();
-    //     if(v_al.includes('/')){ v_al = v_al.replace('/', 'W') }
-    //     if(v_al_fr.includes('/')){ v_al_fr = v_al_fr.replace('/', 'W') }
-    //     changeHashOnFilter({pe: v_al_fr, pe_to:v_al})
-    // })
-    $("#period-dropdownToQs").on('change', function (ev) {
-        let p_val = $("#period-dropdownTo").val()
-        let v_al = $(this).val();
-        
-        let v_al_fr = $('#period-dropdownFrom').val();
-        let v_al_fr_qs = $('#period-dropdownFromQs').val();
-        let v_alf = v_al_fr+v_al_fr_qs //""
-        // if(v_al_fr_qs != null && v_al_fr_qs != ""){
-        //     for (let d = 1; d <= parseFloat(v_al_fr_qs); d++) {
-        //         v_alf += v_al_fr+"Q"+d+";"
-        //     }
-        //     v_alf = v_alf.substr(0,v_alf.length-1)
-        // }
-
-        let v_alq = p_val+v_al //""
-        // if(v_al != null && v_al != ""){
-        //     for (let d = 1; d <= parseFloat(v_al); d++) {
-        //         v_alq += p_val+"Q"+d+";"
-        //     }
-        //     v_alq = v_alq.substr(0,v_alq.length-1)
-        // }
-        
-        if(v_alq.includes('/')){ v_alq = v_alq.replace('/', 'W') }
-        changeHashOnFilter({pe: v_alf, pe_to:v_alq})
-    })
-
-    $("#is_range").on('change', function (v) {
-        let v_al = $(this).is(':checked')
-        changeHashOnFilter({range: v_al.toString()})
-        sessionStorage.setItem('isPeriodRange',v_al)
-    })
-
-
-
-
-    let this_yr = new Date().getFullYear()
-    for (let l = 0; l <= 5; l++) {
-        let y_r = this_yr - l
-        $('.yearsfilt').append('<option value="'+y_r+'">'+y_r+'</option>')
+  $("#facility-dropdown").on("change", function (ev) {
+    let v_al = $(this).val();
+    changeHashOnFilter({ ou: v_al });
+  });
+  $("#mechanism-dropdown").on("change", function (ev) {
+    let v_al = $(this).val();
+    // console.log(v_al)
+    if (v_al === undefined || v_al === null || v_al === "") {
+      // $("#county-dropdown").empty()  // selectVal................................................................................................................................................................................................
+      // reload page
+      location.reload();
+      // empty county dropdown after reload
+      // $("#county-dropdown").empty()
+      // $("#county-dropdown").html(selectVal)
+    } else {
+      changeHashOnFilter({ me: v_al });
+      $("#county-dropdown").empty();
+      fetchCounties(v_al);
     }
+  });
+
+  $("#period-dropdownFrom").on("change", function (ev) {
+    let v_al = $(this).val();
+    if (v_al.includes("/")) {
+      v_al = v_al.replace("/", "W");
+    }
+    changeHashOnFilter({ pe: v_al });
+    $("#period-dropdownFromQs").removeAttr("disabled");
+    $("#period-dropdownTo").removeAttr("disabled");
+    sessionStorage.removeItem("periodIsQuarters");
+    $($("#period-dropdownTo option")).each(function (ix, ele) {
+      if (ele.getAttribute("value") < v_al) {
+        ele.setAttribute("disabled", true);
+      }
+    });
+  });
+  $("#period-dropdownFromQs").on("change", function (ev) {
+    sessionStorage.setItem("periodIsQuarters", true);
+    let p_val = $("#period-dropdownFrom").val();
+    let v_al = $(this).val();
+    let v_alq = [];
+    let finalpe = p_val + v_al;
+    v_alq.push(finalpe);
+
+    // if(sessionStorage.getItem("isPeriodRange") === "false" || !sessionStorage.getItem("isPeriodRange") ){
+    //     v_alq = p_val+"Q"+v_al
+    // }else{
+    //     if(v_al != null && v_al != ""){
+    //         for (let d = 1; d <= parseFloat(v_al); d++) {
+    //             v_alq += p_val+"Q"+d+";"
+    //         }
+    //         v_alq = v_alq.substr(0,v_alq.length-1)
+    //     }
+    // }
+    console.log("fromQs = ", v_alq);
+    if (v_alq.includes("/")) {
+      v_alq = v_alq.replace("/", "W");
+    }
+    changeHashOnFilter({ pe: v_alq });
+    $("#period-dropdownToQs").removeAttr("disabled");
+  });
+  // $("#period-dropdownTo").on('change', function (ev) {
+  //     let v_al = $(this).val();
+  //     let v_al_fr = $('#period-dropdownFrom').val();
+  //     if(v_al.includes('/')){ v_al = v_al.replace('/', 'W') }
+  //     if(v_al_fr.includes('/')){ v_al_fr = v_al_fr.replace('/', 'W') }
+  //     changeHashOnFilter({pe: v_al_fr, pe_to:v_al})
+  // })
+  $("#period-dropdownToQs").on("change", function (ev) {
+    let p_val = $("#period-dropdownTo").val();
+    let v_al = $(this).val();
+
+    let v_al_fr = $("#period-dropdownFrom").val();
+    let v_al_fr_qs = $("#period-dropdownFromQs").val();
+    let v_alf = v_al_fr + v_al_fr_qs; //""
+    // if(v_al_fr_qs != null && v_al_fr_qs != ""){
+    //     for (let d = 1; d <= parseFloat(v_al_fr_qs); d++) {
+    //         v_alf += v_al_fr+"Q"+d+";"
+    //     }
+    //     v_alf = v_alf.substr(0,v_alf.length-1)
+    // }
+
+    let v_alq = p_val + v_al; //""
+    // if(v_al != null && v_al != ""){
+    //     for (let d = 1; d <= parseFloat(v_al); d++) {
+    //         v_alq += p_val+"Q"+d+";"
+    //     }
+    //     v_alq = v_alq.substr(0,v_alq.length-1)
+    // }
+
+    if (v_alq.includes("/")) {
+      v_alq = v_alq.replace("/", "W");
+    }
+    changeHashOnFilter({ pe: v_alf, pe_to: v_alq });
+  });
+
+  $("#is_range").on("change", function (v) {
+    let v_al = $(this).is(":checked");
+    changeHashOnFilter({ range: v_al.toString() });
+    sessionStorage.setItem("isPeriodRange", v_al);
+  });
+
+  let this_yr = new Date().getFullYear();
+  for (let l = 0; l <= 5; l++) {
+    let y_r = this_yr - l;
+    $(".yearsfilt").append('<option value="' + y_r + '">' + y_r + "</option>");
+  }
 });
 
-const getQuartersBtwnPeriod = (p1,p2) => {
-    let y1 = p1.substr(0,p1.length-2)
-    let y2 = p2.substr(0,p2.length-2)
+const getQuartersBtwnPeriod = (p1, p2) => {
+  let y1 = p1.substr(0, p1.length - 2);
+  let y2 = p2.substr(0, p2.length - 2);
 
-    ///////
-    let bg = Math.max(parseFloat(y1), parseFloat(y2))
-    let sm = Math.min(parseFloat(y1), parseFloat(y2))
-    let diff = bg - sm
-    let yrs = []
-    for (let k = 0; k <= diff; k++) {
-         yrs.push( sm + k )
-    }
-    let gq = ''
-    yrs.map(yr=>{
-        gq += ''+getQuartersInYear(yr)+';'
-    })
-    ///////
-    let split_1 = gq.split(p1)[1]
-    let split_2 = split_1.split(p2)[0]
-    let final_pe = p1+split_2+p2
-    return final_pe
-}
-
+  ///////
+  let bg = Math.max(parseFloat(y1), parseFloat(y2));
+  let sm = Math.min(parseFloat(y1), parseFloat(y2));
+  let diff = bg - sm;
+  let yrs = [];
+  for (let k = 0; k <= diff; k++) {
+    yrs.push(sm + k);
+  }
+  let gq = "";
+  yrs.map((yr) => {
+    gq += "" + getQuartersInYear(yr) + ";";
+  });
+  ///////
+  let split_1 = gq.split(p1)[1];
+  let split_2 = split_1.split(p2)[0];
+  let final_pe = p1 + split_2 + p2;
+  return final_pe;
+};
 
 const getPeBtwnYears = (y1, y2, returntype) => {
-    let bg = Math.max(parseFloat(y1), parseFloat(y2))
-    let sm = Math.min(parseFloat(y1), parseFloat(y2))
-    let diff = bg - sm
-    let yrs = []
-    for (let k = 0; k <= diff; k++) {
-         yrs.push( sm + k )
-    }
+  let bg = Math.max(parseFloat(y1), parseFloat(y2));
+  let sm = Math.min(parseFloat(y1), parseFloat(y2));
+  let diff = bg - sm;
+  let yrs = [];
+  for (let k = 0; k <= diff; k++) {
+    yrs.push(sm + k);
+  }
 
-    if(returntype && returntype == 'months'){
-        let mnths = ''
-        yrs.map(yr=>{
-            mnths += ''+gMontwhsInYear(yr)+';'
-        })
-        return mnths
-    } else if(returntype && returntype == 'weeks'){
-        let wks = ''
-        yrs.map(yr=>{
-            wks += ''+gWeeksInYear(yr)+';'
-        })
-        return wks
-    } else if(returntype && returntype == 'quarters'){
-        if(sessionStorage.getItem('isPeriodRange') === 'true' && sessionStorage.getItem('periodIsQuarters') === 'true'){
-            return getQuartersBtwnPeriod(y1,y2)
-        }else if(sessionStorage.getItem('isPeriodRange') === 'false' && sessionStorage.getItem('periodIsQuarters') === 'true'){
-            return y1+';'+y2
-        }
-        let qtrs = ''
-        yrs.map(yr=>{
-            qtrs += ''+getQuartersInYear(yr)+';'
-        })
-        return qtrs
-    }else{
-        return yrs
+  if (returntype && returntype == "months") {
+    let mnths = "";
+    yrs.map((yr) => {
+      mnths += "" + gMontwhsInYear(yr) + ";";
+    });
+    return mnths;
+  } else if (returntype && returntype == "weeks") {
+    let wks = "";
+    yrs.map((yr) => {
+      wks += "" + gWeeksInYear(yr) + ";";
+    });
+    return wks;
+  } else if (returntype && returntype == "quarters") {
+    if (
+      sessionStorage.getItem("isPeriodRange") === "true" &&
+      sessionStorage.getItem("periodIsQuarters") === "true"
+    ) {
+      return getQuartersBtwnPeriod(y1, y2);
+    } else if (
+      sessionStorage.getItem("isPeriodRange") === "false" &&
+      sessionStorage.getItem("periodIsQuarters") === "true"
+    ) {
+      return y1 + ";" + y2;
     }
-}
+    let qtrs = "";
+    yrs.map((yr) => {
+      qtrs += "" + getQuartersInYear(yr) + ";";
+    });
+    return qtrs;
+  } else {
+    return yrs;
+  }
+};
 
-let getDefaultPeriod = () =>{
-    let yr = new Date().getFullYear();
-    let mn = parseFloat(new Date().getMonth())+1
-    let qt 
-    if(mn<4){
-        qt = 1   
-    }else if(mn>=4 && mn < 7){
-        qt = 2   
-    }else if(mn>=7 && mn < 10){
-        qt = 3   
-    }else if(mn>=10){qt = 4}
+let getDefaultPeriod = () => {
+  let yr = new Date().getFullYear();
+  let mn = parseFloat(new Date().getMonth()) + 1;
+  let qt;
+  if (mn < 4) {
+    qt = 1;
+  } else if (mn >= 4 && mn < 7) {
+    qt = 2;
+  } else if (mn >= 7 && mn < 10) {
+    qt = 3;
+  } else if (mn >= 10) {
+    qt = 4;
+  }
 
-    let dp = ''
-    for (let c = 1; c <= qt; c++) {
-        dp += yr+'Q'+c+';'
-    }
-    return dp
-}
+  let dp = "";
+  for (let c = 1; c <= qt; c++) {
+    dp += yr + "Q" + c + ";";
+  }
+  return dp;
+};
 
-const getQuartersInYear = yr => {
-    let t_yr = new Date().getFullYear();
-    if(yr && yr == t_yr){return getDefaultPeriod()}
-    if(!yr || yr.length <4){ yr = 2020 }
-    return ''+yr+'Q1;'+yr+'Q2;'+yr+'Q3;'+yr+'Q4';
-}
+const getQuartersInYear = (yr) => {
+  let t_yr = new Date().getFullYear();
+  if (yr && yr == t_yr) {
+    return getDefaultPeriod();
+  }
+  if (!yr || yr.length < 4) {
+    yr = 2020;
+  }
+  return "" + yr + "Q1;" + yr + "Q2;" + yr + "Q3;" + yr + "Q4";
+};
 
-
-function changeHashOnFilter(new_param){ //new_param = {ou: 'Hfvgj5...'} OR {pe: '2020W12'}
-    let curr_hash = window.location.hash.substr(1)
-    let curr_hash_obj = munchHash(curr_hash)
-    let newHash = {}
-    if(new_param.range != null && new_param.range != ""){ 
-        // new_param.range = new_param.range.toString(); 
-        newHash.range = new_param.range }else{
-        if(curr_hash_obj.range) newHash.range = curr_hash_obj.range
-    }
-    if(new_param.pe){ newHash.pe = new_param.pe }else{
-        if(curr_hash_obj.pe) newHash.pe = curr_hash_obj.pe
-    }
-    if(new_param.pe_to){ newHash.pe_to = new_param.pe_to }else{
-        if(curr_hash_obj.pe_to) newHash.pe_to = curr_hash_obj.pe_to
-    }
-    if(typeof new_param.ou == "object" && new_param.ou.length > 1){ new_param.ou = new_param.ou.join(";") }
-    if(new_param.ou){ newHash.ou = new_param.ou }else{
-        if(curr_hash_obj.ou) newHash.ou = curr_hash_obj.ou
-    }
-    if(new_param.me){ newHash.me = new_param.me }else{
-        if(curr_hash_obj.me) newHash.me = curr_hash_obj.me
-    }
-    let enc_hash = spreadHash(newHash)
-    const new_url = `${window.location.origin}${window.location.pathname}${enc_hash}`
-    window.location.hash = enc_hash
+function changeHashOnFilter(new_param) {
+  //new_param = {ou: 'Hfvgj5...'} OR {pe: '2020W12'}
+  let curr_hash = window.location.hash.substr(1);
+  let curr_hash_obj = munchHash(curr_hash);
+  let newHash = {};
+  if (new_param.range != null && new_param.range != "") {
+    // new_param.range = new_param.range.toString();
+    newHash.range = new_param.range;
+  } else {
+    if (curr_hash_obj.range) newHash.range = curr_hash_obj.range;
+  }
+  if (new_param.pe) {
+    newHash.pe = new_param.pe;
+  } else {
+    if (curr_hash_obj.pe) newHash.pe = curr_hash_obj.pe;
+  }
+  if (new_param.pe_to) {
+    newHash.pe_to = new_param.pe_to;
+  } else {
+    if (curr_hash_obj.pe_to) newHash.pe_to = curr_hash_obj.pe_to;
+  }
+  if (typeof new_param.ou == "object" && new_param.ou.length > 1) {
+    new_param.ou = new_param.ou.join(";");
+  }
+  if (new_param.ou) {
+    newHash.ou = new_param.ou;
+  } else {
+    if (curr_hash_obj.ou) newHash.ou = curr_hash_obj.ou;
+  }
+  if (new_param.me) {
+    newHash.me = new_param.me;
+  } else {
+    if (curr_hash_obj.me) newHash.me = curr_hash_obj.me;
+  }
+  let enc_hash = spreadHash(newHash);
+  const new_url = `${window.location.origin}${window.location.pathname}${enc_hash}`;
+  window.location.hash = enc_hash;
 }
 
 function setPeriodVal(pv) {
-    $('#period-dropdownFrom').val(pv)
-    $('#period-dropdownFrom').change()
+  $("#period-dropdownFrom").val(pv);
+  $("#period-dropdownFrom").change();
 }
 
 // const fetchSubcounties = county_id => {
@@ -497,150 +479,168 @@ function setPeriodVal(pv) {
 //         })
 //     })
 // }
-const fetchwards = scounty_id => {
-    $("#ward-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
-    let arr_of_scounties = []
-    if(typeof scounty_id == 'object'){
-        arr_of_scounties = scounty_id
-    }else
-    if(typeof scounty_id == 'string' && scounty_id.includes(',')){
-        arr_of_scounties = scounty_id.split(',')
-    }else{
-        arr_of_scounties.push(scounty_id)
-    }
-    arr_of_scounties.map(sc_id=>{
-        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${sc_id}.json?includeChildren=true&fields=id,name`, {})
-        .then(response=>{
-            if( response.error ){
-                throw JSON.stringify(response)
-            }
-            let ward = response.organisationUnits;
-            ward.map(wrd=>{
-                $("#ward-dropdown").append('<option value="'+wrd.id+'">'+wrd.name+'</option>')
-            })
-            $("#ward-dropdown").removeAttr('disabled')
-        })
-        .catch(er=>{
-            console.error('error: '+er)
-        })
-    })
-}
-// const fetchFacilities = scounty_id => {
-
-//     console.log('fetching facilities for '+scounty_id)
-//     $("#facility-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
-
-//     let arr_of_facilities = []
-//     if(typeof scounty_id == 'object'){
-//         arr_of_facilities = scounty_id
-//     }else
-//     if(typeof scounty_id == 'string' && scounty_id.includes(',')){
-//         arr_of_facilities = scounty_id.split(',')
-//     }else{
-//         arr_of_facilities.push(scounty_id)
-//     }
-//     // console.log("Check the issue here")
-//     arr_of_facilities.map(sc_id=>{
-//         justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022`, {})
-//         .then(response=>{
-//             console.log(response.json)
-//             if( response.error ){
-//                 throw JSON.stringify(response)
-//             }
-//             let ward = response.datavalues2;
-//             console.log('check whats the issue with this filter....'+ward)
-
-//             ward.map(county=>{
-//                 if (county.facilityuid === scounty_id){
-//                     $("#facility-dropdown").append('<option value="'+county.facilityuid+'">'+county.facility_name+'</option>')
-//                 }
-//             })
-//             $("#facility-dropdown").removeAttr('disabled')
-//         })
-//         .catch(er=>{
-//             console.error('error: '+er)
-//         })
-//     })
-// }
-
-const fetchFacilities = county_id => {
-
-    console.log('fetching facilities')
-
-    $("#facility-dropdown").html('')
-
-    let arr_of_facilities = []
-    if(typeof county_id == 'object'){
-        arr_of_facilities = county_id
-    }else
-        if(typeof county_id == 'string' && county_id.includes(',')){
-            arr_of_facilities = county_id.split(',')
-        }else{
-            arr_of_facilities.push(county_id)
-        }
-
-    arr_of_facilities.map(c_id=>{
-        justFetch('https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022')
-            .then(response=>{
-                console.log(response)
-                if( response.error ){
-                    throw JSON.stringify(response)
-                }
-                let facilities = response.datavalues2;
-                // console.log(facilities)
-                $("#facility-dropdown").html(selectVal)
-
-                facilities.map(facility=>{
-                    if (facility.countyuid === c_id){
-                        $("#facility-dropdown").append('<option value="'+facility.facilityuid+'">'+facility.facility_name+'</option>')
-                    }
-                })
-                $("#facility-dropdown").removeAttr('disabled')
-            })
-            .catch(er=>{
-                console.error('error: '+er)
-            })
-    }
+const fetchwards = (scounty_id) => {
+  $("#ward-dropdown").html(""); //<option disabled selected value="">Select subcounty</option>')
+  let arr_of_scounties = [];
+  if (typeof scounty_id == "object") {
+    arr_of_scounties = scounty_id;
+  } else if (typeof scounty_id == "string" && scounty_id.includes(",")) {
+    arr_of_scounties = scounty_id.split(",");
+  } else {
+    arr_of_scounties.push(scounty_id);
+  }
+  arr_of_scounties.map((sc_id) => {
+    justFetch(
+      `https://partnermanagementsystem.uonbi.ac.ke/api/organisationUnits/${sc_id}.json?includeChildren=true&fields=id,name`,
+      {}
     )
-}
+      .then((response) => {
+        if (response.error) {
+          throw JSON.stringify(response);
+        }
+        let ward = response.organisationUnits;
+        ward.map((wrd) => {
+          $("#ward-dropdown").append(
+            '<option value="' + wrd.id + '">' + wrd.name + "</option>"
+          );
+        });
+        $("#ward-dropdown").removeAttr("disabled");
+      })
+      .catch((er) => {
+        console.error("error: " + er);
+      });
+  });
+};
 
-const fetchCounties = mechanism_id => {
-    $("#county-dropdown").html('')//<option disabled selected value="">Select subcounty</option>')
-    let arr_of_facilities = []
-    if(typeof mechanism_id == 'object'){
-        arr_of_facilities = mechanism_id
-    }else
-    if(typeof mechanism_id == 'string' && mechanism_id.includes(',')){
-        arr_of_facilities = mechanism_id.split(',')
-    }else{
-        arr_of_facilities.push(mechanism_id)
-    }
-    arr_of_facilities.map(sc_id=>{
-        justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022`, {})
-        .then(response=>{
-            // console.log(response.datavalues)
-            if( response.error ){
-                throw JSON.stringify(response)
-            }
-            let ward = response.datavalues;
-            $("#county-dropdown").html(selectVal)
-            ward.map(county=>{
-                if (county.ipuid === mechanism_id){
-                    $("#county-dropdown").append('<option value="'+county.countyuid+'">'+county.county_name+'</option>')
-                }
-            })
-            $("#county-dropdown").removeAttr('disabled')
-        })
-        .catch(er=>{
-            console.error('error: '+er)
-        })
-    })
-}
+const fetchFacilities = (county_id) => {
+  console.log("fetching facilities");
+
+  $("#facility-dropdown").html("");
+
+  let arr_of_facilities = [];
+  if (typeof county_id == "object") {
+    arr_of_facilities = county_id;
+  } else if (typeof county_id == "string" && county_id.includes(",")) {
+    arr_of_facilities = county_id.split(",");
+  } else {
+    arr_of_facilities.push(county_id);
+  }
+
+  arr_of_facilities.map((c_id) => {
+    justFetch(
+      "https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022"
+    )
+      .then((response) => {
+        console.log(response);
+        if (response.error) {
+          throw JSON.stringify(response);
+        }
+        let facilities = response.datavalues2;
+
+        
+
+        // get all facilities that has the same mechanism within different counties
+        // ipFacilities = [];
+
+        // facilities.map((facility) => {
+        //     console.log(facility);
+        //     if (facility.ipuid == c_id) {
+        //         // ipFacilities.push(facility.facility_name);
+        //     }
+        // });
+
+        // console.log(ipFacilities);
 
 
-const selectVal = `<option selected="true" value="">Select...</option>`
+        $("#facility-dropdown").html(selectVal);
 
+        //fetch all facilities with the same mechanism_id
+        facilities.map((facility) => {
+        //   console.log(facility);
+          if (facility.countyuid === c_id) {
+            $("#facility-dropdown").append(
+              '<option value="' +
+                facility.facilityuid +
+                '">' +
+                facility.facility_name +
+                "</option>"
+            );
+          }
+          else if (facility.countyuid === "ip-sites" & facility.ipuid === $("#mechanism-dropdown").val()) {
+            $("#facility-dropdown").append(
+                '<option value="' +
+                  facility.facilityuid +
+                  '">' +
+                  facility.facility_name +
+                  "</option>"
+            )};
+        });
+        $("#facility-dropdown").removeAttr("disabled");
+      })
+      .catch((er) => {
+        console.error("error: " + er);
+      });
+  });
+};
 
+const fetchCounties = (mechanism_id) => {
+  let arr_of_facilities = [];
+  if (typeof mechanism_id == "object") {
+    arr_of_facilities = mechanism_id;
+  } else if (typeof mechanism_id == "string" && mechanism_id.includes(",")) {
+    arr_of_facilities = mechanism_id.split(",");
+  } else {
+    arr_of_facilities.push(mechanism_id);
+  }
+  arr_of_facilities.map((sc_id) => {
+    justFetch(
+      `https://partnermanagementsystem.uonbi.ac.ke/api/dataStore/dqa/dqa2022`,
+      {}
+    )
+      .then((response) => {
+        // console.log(response.datavalues)
+        if (response.error) {
+          throw JSON.stringify(response);
+        }
+        let county = response.datavalues;
+
+        $("#county-dropdown").html(selectVal);
+
+        $("#county-dropdown").append('<option value="ip-sites">All IP Sites</option>');
+
+        // county.map((c) => {
+        //     $("#county-dropdown").append(
+        //         '<option value="' + c.countyuid + '">' + c.county_name + "</option>"
+        //     );
+        // });
+
+        // select all facilities for all mechanism_id
+
+        // $("#county-dropdown").html(`<option value="">All Sites...</option>`)
+        county.map((county) => {
+          if (county.ipuid === mechanism_id) {
+
+            $("#county-dropdown").append(
+              '<option value="' +
+                county.countyuid +
+                '">' +
+                county.county_name +
+                "</option>"
+            );
+          }
+        });
+        // $("#county-dropdown").html(allSites)
+        $("#county-dropdown").removeAttr("disabled");
+      })
+      .catch((er) => {
+        console.error("error: " + er);
+      });
+  });
+};
+
+const selectVal = `<option selected="true" value="">Select County</option>`;
+
+const allSites = `<option value="">All Sites...</option>`;
 
 const ke_counties = `
             <!--<option selected="true" disabled="" value="">Select County</option>-->
@@ -658,4 +658,4 @@ const ke_counties = `
             <option value="T4urHM47nlm">Tharaka Nithi County</option>
             <option value="pZqQRRW7PHP">Uasin Gishu County</option>
             <option value="sANMZ3lpqGs">Vihiga County</option>
-`
+`;
