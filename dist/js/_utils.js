@@ -334,11 +334,11 @@ let plotStacked = (
     credits: {
       enabled: false,
     },
-    tooltip: {
-      // valueSuffix: '',
-      headerFormat: "<b>{point.x}</b><br/>",
-      pointFormat: "{series.name}: {point.y}<br/>Total: {points.y}",
-    },
+    // tooltip: {
+    //   // valueSuffix: '',
+    //   headerFormat: "<b>{point.x}</b><br/>",
+    //   pointFormat: "{series.name}: {point.y}<br/>Total: {points.y}",
+    // },
     series: y_data,
     colors: colo,
   });
