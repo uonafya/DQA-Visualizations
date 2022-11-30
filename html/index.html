@@ -168,27 +168,25 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">                    
+                    <div class="row">
                         <div class="col-md-6">
-                        <div id="PMTCT_HEI_POS_YOUNGER">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">PMTCT HEI POS (0-2 months)</h4>
-                                        <div class="graph" id="pmtc-hei-younger">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">PMTCT HEI POS (0-2 months)</h4>
+                                    <div class="graph" id="pmtc-hei-younger">
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>         
 
+                    
                         <div class="col-md-6">
-                        <div id="PMTCT_HEI_POS_OLDER">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">PMTCT HEI POS (>2-12 months)</h4>
-                                        <div class="graph" id="pmtc-hei-older">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">PMTCT HEI POS (>2-12 months)</h4>
+                                    <div class="graph" id="pmtc-hei-older">
 
                                         </div>
                                     </div>
@@ -877,6 +875,7 @@
 
                     indicator_name = ['Register/EMR', 'DATIM']
 
+
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(0))
 
@@ -885,6 +884,8 @@
                             return
                         }
                     })
+
+                    indicator_name = ['Register/KenyaEMR','DATIM']
 
                     x_array = indicator_name
 
@@ -903,7 +904,7 @@
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["PMTC_HEI_POS (0-2 months)"]]
+                    let data  = [["PMTCT_HEI_POS (0-2 months)"]]
                     let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
@@ -937,7 +938,7 @@
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "PMTC_HEI_POS (0-2 months)"
+                    y_data[0].name = "PMTCT_HEI_POS (0-2 months)"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
                     y_data[0].dataLabels = [{
@@ -1012,6 +1013,7 @@
 
                     indicator_name = ['Register/EMR', 'DATIM']
 
+
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(0))
 
@@ -1021,10 +1023,12 @@
                         }
                     })
 
+                    indicator_name = ['Register/KenyaEMR', 'DATIM']
+
                     x_array = indicator_name
 
                     
-                    plotStacked(x_array, "Data Source", y_data, "","PMTC_HEI_POS (0-2 months)", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","PMTCT_HEI_POS (0-2 months)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -1038,7 +1042,7 @@
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["PMTC_HEI_POS (>2-12 months)"]]
+                    let data  = [["PMTCT_HEI_POS (>2-12 months)"]]
                     let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
@@ -1072,7 +1076,7 @@
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "PMTC_HEI_POS (>2-12 months)"
+                    y_data[0].name = "PMTCT_HEI_POS (>2-12 months)"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
                     y_data[0].dataLabels = [{
@@ -1155,10 +1159,12 @@
 
                     indicator_name = ['Register/EMR', 'DATIM']
 
+
+
                     x_array = indicator_name
 
                     
-                    plotStacked(x_array, "Data Source", y_data, "","PMTC_HEI_POS (>2-12 months)", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","PMTCT_HEI_POS (>2-12 months)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -1337,7 +1343,9 @@
                     let y_data = []
 
                     y_data[0] = {}
+
                     y_data[0].name = "PrEP_NEW"
+
                     y_data[0].color = colours[1]
                     y_data[0].data = []
                     y_data[0].dataLabels = [{
@@ -1420,6 +1428,8 @@
                             return
                         }
                     })
+
+                    indicator_name = ['Register/KenyaEMR','MOH 731', 'KHIS','DATIM']
 
                     x_array = indicator_name
 
@@ -1556,6 +1566,7 @@
 
                     indicator_name = ['Register/EMR', 'DATIM']
 
+
                     x_array = indicator_name
 
                     
@@ -1688,6 +1699,7 @@
                     })
 
                     indicator_name = ['Register/EMR', 'DATIM']
+
 
                     x_array = indicator_name
 
