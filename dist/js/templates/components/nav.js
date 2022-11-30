@@ -1,7 +1,7 @@
 const nav_template = `
 <ul id="sidebarnav" class="p-t-30">
     <li class="sidebar-item">
-        <a class="sidebar-link" href="https://partnermanagementsystem.uonbi.ac.ke/api/apps/Landing-Page/index.html" aria-expanded="false">
+        <a class="sidebar-link" href="/" aria-expanded="false">
             <span class="text-white text-bold">&larr;</span>&nbsp;
             <span class="hide-menu">Back to Other Apps</span>
         </a>
