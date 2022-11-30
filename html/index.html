@@ -1488,16 +1488,16 @@
         var date_options = {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: "numeric" };
 
         let pdfGenarate = ((idwrapper) => {
-        $(".data_table").removeClass('hidden')
+        // $(".data_table").removeClass('hidden')
         var downloadPDF = document.getElementById(idwrapper)
         
         var opt = {
-            margin:       0,
+            margin:       2,
             filename:     'HIV DQA - '+(new Date().toLocaleDateString("en-US", date_options))+'.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2 },
             pagebreak:    {mode: ['avoid-all','css','legacy']},
-            jsPDF:        { unit: 'mm', format: 'a3', orientation: 'landscape' }
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
             var worker = html2pdf().set(opt).from(downloadPDF).save();
             console.log(worker)        
