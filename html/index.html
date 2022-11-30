@@ -168,21 +168,24 @@
                         </div>
                     </div>
 
-                    <div id="PMTCT_HEI_POS_YOUNGER">
-                        <div class="col-md-12">
+
+                    
+
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">PMTC HEI POS (0-2 months)</h4>
+                                    <h4 class="card-title">PMTCT HEI POS (0-2 months)</h4>
                                     <div class="graph" id="pmtc-hei-younger">
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
 
-                    <div id="PMTCT_HEI_POS_OLDER">
-                        <div class="col-md-12">
+                    
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">PMTCT HEI POS (>2-12 months)</h4>
@@ -199,7 +202,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">VMMC CICR</h4>
+                                    <h4 class="card-title">VMMC CIRC</h4>
                                     <div class="graph" id="vmmc-circ">
 
                                     </div>
@@ -760,7 +763,7 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:JSUvdRq5TeM&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&filter=pe:202207;202208;202209&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:JSUvdRq5TeM&dimension=UWmoLhDe26q:cKZDPWaSacf;Ku9fUMBfDia&filter=pe:202207;202208;202209&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
@@ -871,7 +874,7 @@
 
                     y_data[1].data = y_data[1].data[0]
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
+                   
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
@@ -881,6 +884,8 @@
                             return
                         }
                     })
+
+                    indicator_name = ['Register/KenyaEMR','DATIM']
 
                     x_array = indicator_name
 
@@ -895,11 +900,11 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:iMdfdPDeYNV&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&filter=pe:202207;202208;202209&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:iMdfdPDeYNV&dimension=UWmoLhDe26q:cKZDPWaSacf;Ku9fUMBfDia&filter=pe:202207;202208;202209&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["PMTC_HEI_POS (0-2 months)"]]
+                    let data  = [["PMTCT_HEI_POS (0-2 months)"]]
                     let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
@@ -933,7 +938,7 @@
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "PMTC_HEI_POS (0-2 months)"
+                    y_data[0].name = "PMTCT_HEI_POS (0-2 months)"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
                     y_data[0].dataLabels = [{
@@ -1006,7 +1011,7 @@
 
                     y_data[1].data = y_data[1].data[0]
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
+                    
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
@@ -1017,10 +1022,12 @@
                         }
                     })
 
+                    indicator_name = ['Register/KenyaEMR', 'DATIM']
+
                     x_array = indicator_name
 
                     
-                    plotStacked(x_array, "Data Source", y_data, "","PMTC_HEI_POS (0-2 months)", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","PMTCT_HEI_POS (0-2 months)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -1030,11 +1037,11 @@
                 // console.log('check this one here....................................................................................')
                 p_o_pe = groupBy(groupby)
                 // console.log({graph: p_o_pe})
-                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QTQ8Hl3mhMS&dimension=UWmoLhDe26q:cKZDPWaSacf;Te7N3f3pNn2;xFWVLNzKkaT;Ku9fUMBfDia&filter=pe:202207;202208;202209&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
+                justFetch(`https://partnermanagementsystem.uonbi.ac.ke/api/29/analytics.json?dimension=dx:QTQ8Hl3mhMS&dimension=UWmoLhDe26q:cKZDPWaSacf;Ku9fUMBfDia&filter=pe:202207;202208;202209&filter=ou:${org_unit}&filter=lRp2LBbTuM5:${mechanism}&displayProperty=NAME&outputIdScheme=UID`,{})
                 .then(response=>{    
 
                     // console.log({response})
-                    let data  = [["PMTC_HEI_POS (>2-12 months)"]]
+                    let data  = [["PMTCT_HEI_POS (>2-12 months)"]]
                     let map_filter = response.metaData.dimensions.UWmoLhDe26q
 
                     // if(p_o_pe[2]==='lRp2LBbTuM5' && ($('#mechanism-dropdown').val()===active_partners_code.toString().replace(/,/gi,';') || $('#mechanism-dropdown').val() === null)){
@@ -1068,7 +1075,7 @@
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "PMTC_HEI_POS (>2-12 months)"
+                    y_data[0].name = "PMTCT_HEI_POS (>2-12 months)"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
                     y_data[0].dataLabels = [{
@@ -1149,12 +1156,12 @@
                         }
                     })
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
+                    indicator_name = ['Register/KenyaEMR',  'DATIM']
 
                     x_array = indicator_name
 
                     
-                    plotStacked(x_array, "Data Source", y_data, "","PMTC_HEI_POS (>2-12 months)", period_string, target2, 'column', colours, true, "")
+                    plotStacked(x_array, "Data Source", y_data, "","PMTCT_HEI_POS (>2-12 months)", period_string, target2, 'column', colours, true, "")
                 })
             }
 
@@ -1333,7 +1340,7 @@
                     let y_data = []
 
                     y_data[0] = {}
-                    y_data[0].name = "VMMC_CIRC"
+                    y_data[0].name = "PrEP New"
                     y_data[0].color = colours[1]
                     y_data[0].data = []
                     y_data[0].dataLabels = [{
@@ -1406,8 +1413,6 @@
 
                     y_data[1].data = y_data[1].data[0]
 
-                    indicator_name = ['Register/KenyaEMR', 'MOH 731', 'KHIS', 'DATIM']
-
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(2))
 
@@ -1416,6 +1421,8 @@
                             return
                         }
                     })
+
+                    indicator_name = ['Register/KenyaEMR','MOH 731', 'KHIS','DATIM']
 
                     x_array = indicator_name
 
@@ -1550,7 +1557,7 @@
                     })
 
 
-                    indicator_name = ['Register/KenyaEMR', 'Datim']
+                    indicator_name = ['Register/KenyaEMR', 'DATIM']
 
                     x_array = indicator_name
 
@@ -1683,7 +1690,7 @@
                         }
                     })
 
-                    indicator_name = ['Register/KenyaEMR', 'Datim']
+                    indicator_name = ['Register/KenyaEMR', 'DATIM']
 
                     x_array = indicator_name
 
