@@ -168,35 +168,30 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+
+                    <div class="row">                    
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">PMTCT HEI POS (0-2 months)</h4>
                                     <div class="graph" id="pmtc-hei-younger">
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>         
+                        </div>
 
-                    
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">PMTCT HEI POS (>2-12 months)</h4>
                                     <div class="graph" id="pmtc-hei-older">
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
+                        </div>     
                     </div>
-
-
                     <div class="row" id="VMMC_CIRC">
                         <div class="col-md-12">
                             <div class="card">
@@ -875,7 +870,6 @@
 
                     indicator_name = ['Register/EMR', 'DATIM']
 
-
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(0))
 
@@ -1012,7 +1006,6 @@
                     y_data[1].data = y_data[1].data[0]
 
                     indicator_name = ['Register/EMR', 'DATIM']
-
 
                     y_data[1].data.map((y,i)=>{
                         y_data[1].data[i] = parseFloat(y.toFixed(0))
@@ -1158,8 +1151,6 @@
                     })
 
                     indicator_name = ['Register/EMR', 'DATIM']
-
-
 
                     x_array = indicator_name
 
@@ -1343,9 +1334,7 @@
                     let y_data = []
 
                     y_data[0] = {}
-
                     y_data[0].name = "PrEP_NEW"
-
                     y_data[0].color = colours[1]
                     y_data[0].data = []
                     y_data[0].dataLabels = [{
@@ -1566,7 +1555,6 @@
 
                     indicator_name = ['Register/EMR', 'DATIM']
 
-
                     x_array = indicator_name
 
                     
@@ -1699,7 +1687,6 @@
                     })
 
                     indicator_name = ['Register/EMR', 'DATIM']
-
 
                     x_array = indicator_name
 
