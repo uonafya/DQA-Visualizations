@@ -335,9 +335,10 @@ let plotStacked = (
       enabled: false,
     },
     tooltip: {
+      enabled: false,
       // valueSuffix: '',
       // headerFormat: "<b>{point.x}</b><br/>",
-      pointFormat: "{series.name}: {point.y}<br/>Total: {points.y}",
+      // pointFormat: "{series.name}: {point.y}<br/>Total: {points.y}",
     },
     series: y_data,
     colors: colo,
