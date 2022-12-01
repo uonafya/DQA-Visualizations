@@ -1,1 +1,1 @@
-DHIS2 Partner Reporting Dashboard for Visulization of Key USAID Indicators
+DHIS2 Data Quality Assessement Visulization of Key USAID Indicators
