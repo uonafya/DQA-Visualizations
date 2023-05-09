@@ -1,3 +1,4 @@
+
 //additional
 //function to get SOH value from loop
 function filterItems(array,query) {
